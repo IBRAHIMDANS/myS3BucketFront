@@ -1,0 +1,16 @@
+.cover {
+  background-image: url("/assets/img/404.jpg");
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: .75;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+};
+.app-btn {
+  color: white;
+  background-color: black;
+}
