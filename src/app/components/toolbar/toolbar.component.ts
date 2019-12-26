@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatMenuTrigger } from '@angular/material';
 
 @Component({
   selector: 'app-toolbar',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
+  @ViewChild(MatMenuTrigger, {static: false}) trigger: MatMenuTrigger;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+    console.log(this.trigger);
+  }
+
+  someMethod() {
+    this.trigger.openMenu();
+    console.log(this.trigger);
   }
 
 }

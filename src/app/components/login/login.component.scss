@@ -1,59 +1,52 @@
 .app-login-container {
-  margin: 5% 0 0 0;
-  display: flex;
-  justify-content: center;
-}
-.app-check {
-  display: contents;
-  text-decoration: none;
-  color: blue;
-  cursor: pointer;
+  margin: 10% 10% 10%;
 }
 .app-form-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
-
-.app-login-title {
+.app-connexion-title {
   display: flex;
   justify-content: center;
   padding: 1em;
 }
-
-.btn-form {
-  display: flex;
-  justify-content: center;
-  margin: 5px;
+.btn-login {
+  display: grid;
 }
 
-.spacing {
-  margin-right: 10px;
-}
 .spinner {
   display: flex;
   margin-left: 10px;
   justify-self: center;
 }
+.app-connexion-btn {
+  display: flex;
+  justify-content: center;
+}
+.error {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
 .text {
   display: flex;
   justify-content: center;
 }
-.app-home-container {
+.app-forget-container {
   display: flex;
   justify-content: center;
   margin: 1em;
 }
-
+.app-register-container {
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+}
 .app-text {
   display: flex;
   color: blue;
   border: none;
   outline:none;
   cursor: pointer;
-}
-.app-hint {
-  margin-bottom: 1em;
-  font-size: 12px;
-  font-style: italic;
+  align-items:center;
 }

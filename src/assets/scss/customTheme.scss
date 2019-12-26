@@ -4,7 +4,7 @@
 
 $app-primary: mat-palette($mat-deep-orange);
 $app-accent: mat-palette($mat-blue);
-$app-warn: mat-palette($mat-amber);
+$app-warn: mat-palette($mat-red);
 
 $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 

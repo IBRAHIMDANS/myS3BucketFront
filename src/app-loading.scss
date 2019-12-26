@@ -1,0 +1,9 @@
+.app-loading {
+  .logo {
+    width: 100px;
+    height: 100px;
+
+    // this way asset gets processed by webpack
+    background: url("/assets/img/mys3.png") center center no-repeat;
+  }
+}

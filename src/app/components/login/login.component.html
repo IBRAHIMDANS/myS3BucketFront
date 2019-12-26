@@ -1,0 +1,39 @@
+<div class="app-login-container">
+  <form (submit)="login($event)" class="app-form-container">
+    <mat-card-title class="app-connexion-title"> Connexion</mat-card-title>
+    <mat-form-field appearance="fill">
+      <mat-label>Adresse e-mail</mat-label>
+      <input [formControl]="userForm.email" matInput name="login" required/>
+      <mat-error *ngIf="userForm.email.invalid && userForm.email.errors.required">L'email est invalide.</mat-error>
+      <mat-error *ngIf="userForm.email.invalid && userForm.email.errors.loginInvalid">L'email ou le mot de passe est
+        incorrect.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Mot de passe</mat-label>
+      <input [formControl]="userForm.password" matInput name="password" required type="password"/>
+      <mat-error *ngIf="userForm.password.invalid && userForm.password.errors.required">Le mot de passe est requis.
+      </mat-error>
+      <mat-error *ngIf="userForm.password.invalid && userForm.password.errors.minlength">Le mot de passe doit faire
+        caractères de plus.
+      </mat-error>
+    </mat-form-field>
+    <mat-error class="error" *ngIf="!hidden &&  error">Adresse e-mail ou mot de passe incorrect</mat-error>
+    <div class="btn-login">
+      <button class="app-connexion-btn" color="accent" *ngIf="!hidden" mat-raised-button
+              [disabled]="! userForm.email.valid || ! userForm.password.valid">
+        Connexion
+      </button>
+      <mat-progress-spinner class="spinner" color="warn" diameter="25" *ngIf="hidden"
+                            mode="indeterminate"></mat-progress-spinner>
+    </div>
+    <div class="app-forget-container">
+      <span (click)="resetPassword($event)" matBadge="?" matBadgeColor="warn" matBadgePosition="after"
+            matBadgeOverlap="false" class="app-text">Mot de passe oublié</span>
+    </div>
+    <div class="app-register-container">
+      <span [routerLink]="['/', 'register']" class="app-text"> <mat-icon color="blue"> person_add</mat-icon>&nbsp; S'inscrire</span>
+    </div>
+
+  </form>
+</div>

@@ -1,1 +1,45 @@
-<p>register works!</p>
+<div class="app-login-container">
+  <form class="app-form-container">
+    <mat-card-title class="app-login-title"> Inscription </mat-card-title>
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput  name="nickname" [formControl]="userForm.controls.nickname" required>
+      <mat-error *ngIf=" userForm.controls.nickname.errors?.required "> Merci de saisir les champs obligatoires
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <label>
+        <input matInput name="email" [formControl]="userForm.controls.email" required>
+      </label>
+      <mat-error *ngIf=" userForm.controls.email.errors?.required "> Merci de saisir les champs obligatoires</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Mot de passe</mat-label>
+      <label>
+        <input matInput name="password" [formControl]="userForm.controls.password" required type="password">
+      </label>
+      <mat-error *ngIf=" userForm.controls.password.errors?.required "> Merci de saisir les champs obligatoires
+      </mat-error>
+
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Confirmer votre mot de passe</mat-label>
+      <label>
+        <input matInput name="passwordConfrimation" [formControl]="userForm.controls.passwordConfirm" required
+               type="password">
+      </label>
+    </mat-form-field>
+    <mat-error *ngIf="!checkPasswords()  ">Les mots de passe ne
+      correspondent pas
+    </mat-error>
+    <div class="btn-form">
+      <button type="submit" color="accent" mat-raised-button  *ngIf="!hidden" [disabled]="userForm.invalid"> S'inscrire</button>
+      <mat-progress-spinner class="spinner" color="warn" diameter="25" *ngIf="hidden" mode="indeterminate"></mat-progress-spinner>
+    </div>
+    <div class="app-home-container">
+      <span> Déjà inscrit(e) ? </span>
+      <span [routerLink]="['/', 'login']" class="app-text">&nbsp; S'identifier</span>
+    </div>
+  </form>
+</div>

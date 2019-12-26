@@ -27,7 +27,7 @@
     ],
     "interface-name": false,
     "callable-types": true,
-    "forin": true,
+    "forin": false,
     "eofline": true,
     "curly": true,
     "interface-over-type-literal": true,
