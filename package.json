@@ -30,6 +30,7 @@
     "@angular/router": "~8.2.14",
     "@fortawesome/angular-fontawesome": "^0.5.0",
     "@fullcalendar/core": "^4.3.1",
+    "@types/express": "^4.17.2",
     "@types/lodash": "^4.14.149",
     "chart.js": "^2.9.3",
     "express": "^4.17.1",
