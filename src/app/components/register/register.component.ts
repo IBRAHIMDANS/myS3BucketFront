@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MustMatch } from '../../helpers/must-match.validator';
+import { UsersService } from '../../services/users.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -18,8 +20,9 @@ export class RegisterComponent implements OnInit {
     validator: MustMatch('password', 'passwordConfirm')
   });
   private hidden: boolean;
-
-  constructor(private formBuilder: FormBuilder) {
+  public error: any;
+  constructor(private route: ActivatedRoute,
+              private router: Router, private formBuilder: FormBuilder, private userService: UsersService) {
   }
 
   public checkPasswords(): boolean {
@@ -29,6 +32,31 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.checkPasswords();
     this.hidden = false;
+  }
+
+  submitFrom(e: Event) {
+    e.preventDefault();
+    this.hidden = true;
+    return this.userService
+      .registerUser({
+        nickname: this.userForm.value.nickname,
+        password: this.userForm.value.password,
+        passwordConfirm: this.userForm.value.passwordConfirm,
+        email: this.userForm.value.email
+      })
+      .subscribe(res => {
+        console.log(res);
+        localStorage.setItem('token', res.meta.token);
+        this.router.navigate(['/', 'login']);
+        return res;
+      }, error => {
+        console.log(error);
+        this.hidden = false;
+        this.error = error
+        return error;
+      }, () => {
+        this.hidden = false;
+      });
   }
 
 }

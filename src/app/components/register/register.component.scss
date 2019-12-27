@@ -3,16 +3,19 @@
   display: flex;
   justify-content: center;
 }
+
 .app-check {
   display: contents;
   text-decoration: none;
   color: blue;
   cursor: pointer;
 }
+
 .app-form-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  width: 70vw;
 }
 
 .app-login-title {
@@ -30,15 +33,18 @@
 .spacing {
   margin-right: 10px;
 }
+
 .spinner {
   display: flex;
   margin-left: 10px;
   justify-self: center;
 }
+
 .text {
   display: flex;
   justify-content: center;
 }
+
 .app-home-container {
   display: flex;
   justify-content: center;
@@ -49,9 +55,10 @@
   display: flex;
   color: blue;
   border: none;
-  outline:none;
+  outline: none;
   cursor: pointer;
 }
+
 .app-hint {
   margin-bottom: 1em;
   font-size: 12px;
