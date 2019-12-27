@@ -71,7 +71,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
   ],
   bootstrap: [AppComponent],
-  entryComponents: []
+  entryComponents: [ResetPasswordComponent]
 })
 export class AppModule {
 }

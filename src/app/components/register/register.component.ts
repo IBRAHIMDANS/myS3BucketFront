@@ -19,8 +19,9 @@ export class RegisterComponent implements OnInit {
   }, {
     validator: MustMatch('password', 'passwordConfirm')
   });
-  private hidden: boolean;
   public error: any;
+  private hidden: boolean;
+
   constructor(private route: ActivatedRoute,
               private router: Router, private formBuilder: FormBuilder, private userService: UsersService) {
   }
@@ -45,14 +46,17 @@ export class RegisterComponent implements OnInit {
         email: this.userForm.value.email
       })
       .subscribe(res => {
-        console.log(res);
-        localStorage.setItem('token', res.meta.token);
+        // console.log(res);
+        // localStorage.setItem('token', res.meta.token);
         this.router.navigate(['/', 'login']);
         return res;
       }, error => {
         console.log(error);
         this.hidden = false;
-        this.error = error
+        this.error = error;
+        setTimeout(() => {
+          this.error = undefined;
+        }, 2000);
         return error;
       }, () => {
         this.hidden = false;

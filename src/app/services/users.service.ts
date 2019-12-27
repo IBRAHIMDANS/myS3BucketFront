@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { User } from '../interfaces/user.interfaces';
-import {toLower} from 'lodash';
+import { toLower } from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +33,29 @@ export class UsersService {
     return this.httpClient
       .post(`${environment.backEndApi}/users`, {
           email: toLower(email), nickname, password
+        },
+        this.httpOption
+      )
+      .pipe(
+        map(res => {
+            return res;
+          },
+          catchError(err => {
+            return err;
+          })
+        )
+      );
+  }
+
+  public login(
+    {
+      email,
+      password
+    }: User): Observable<any> {
+
+    return this.httpClient
+      .post(`${environment.backEndApi}/auth/login`, {
+          email: toLower(email), password
         },
         this.httpOption
       )

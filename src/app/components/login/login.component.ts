@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
+import { UsersService } from '../../services/users.service';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 @Component({
   selector: 'app-login',
@@ -11,45 +13,56 @@ import { MatDialog } from '@angular/material';
 export class LoginComponent implements OnInit {
   public error: undefined;
   private hidden: boolean;
-  public userForm = {
+  public userForm = this.formBuilder.group({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(4)]),
-  };
+  });
 
-  constructor(private route: ActivatedRoute,
-              private router: Router, public dialog: MatDialog) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
+              private router: Router, public dialog: MatDialog, private userService: UsersService) {
   }
+
   resetPassword(event: Event): void {
     event.preventDefault();
-    // this.dialog.open(ResetpasswordComponent, {
-    //   autoFocus: true,
-    //   disableClose: true,
-    //   data: {
-    //     title: 'Ajouter une location',
-    //     id: '1'
-    //   }
-    // });
+    this.dialog.open(ResetPasswordComponent, {
+      autoFocus: true,
+      disableClose: true,
+      data: {
+        title: 'Reset  password',
+      }
+    });
   }
+
   ngOnInit() {
     this.hidden = false;
+    if (this.error) {
+      setTimeout(() => {
+        console.log(this.error);
+        this.error = undefined;
+      }, 100);
+    }
   }
+
   public login(e: Event) {
     e.preventDefault();
     this.hidden = true;
-    // this.userService.login({ email: this.userForm.email.value, password: this.userForm.password.value }).subscribe(res => {
-    //   this.hidden = false;
-    //   // @ts-ignore
-    //   const token = res.meta.token;
-    //   localStorage.setItem('isconnect', 'true');
-    //   localStorage.setItem('token', token);
-    //   // @ts-ignore
-    //   this.router.navigate(['/', 'bien']);
-    //   return res;
-    // }, error => {
-    //   this.hidden = false;
-    //   return this.error = error.error;
-    // }, () => {
-    // });
+    return this.userService
+      .login({
+        email: this.userForm.controls.email.value,
+        password: this.userForm.controls.password.value
+      }).subscribe(res => {
+        this.hidden = false;
+        return res;
+      }, error => {
+        console.log(error);
+        this.error = error;
+        this.hidden = false;
+        setTimeout(() => {
+          this.error = undefined;
+        }, 2000);
+        return error;
+      }, () => {
+      });
   }
 
 }

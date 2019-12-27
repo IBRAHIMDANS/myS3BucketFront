@@ -1,5 +1,5 @@
 <div class="app-login-container">
-  <form class="app-form-container">
+  <form class="app-form-container" (submit)="submitFrom($event)">
     <mat-card-title class="app-login-title"> Inscription</mat-card-title>
     <mat-form-field appearance="fill">
       <mat-label>Username</mat-label>
@@ -35,8 +35,7 @@
     </mat-error>
     <mat-error *ngIf="error"> Impossible de s'inscrire l'email doit etre unique</mat-error>
     <div class="btn-form">
-      <button type="submit" color="accent" mat-raised-button *ngIf="!hidden" [disabled]="userForm.invalid"
-              (click)="submitFrom($event)"> S'inscrire
+      <button type="submit" color="accent" mat-raised-button *ngIf="!hidden" [disabled]="userForm.invalid"> S'inscrire
       </button>
       <mat-progress-spinner class="spinner" color="warn" diameter="25" *ngIf="hidden"
                             mode="indeterminate"></mat-progress-spinner>
