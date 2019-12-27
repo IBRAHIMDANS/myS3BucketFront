@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { UsersService } from '../../services/users.service';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reset-password',
@@ -10,6 +10,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 })
 export class ResetPasswordComponent implements OnInit {
   public status;
+  public load: boolean;
   public changePasswordForm = {
     email: new FormControl('', [Validators.required, Validators.email]),
   };
@@ -25,13 +26,15 @@ export class ResetPasswordComponent implements OnInit {
   }
   public updatePassword(event: Event) {
     event.preventDefault();
-
-    // this.userService.sendMailforChangePassword(this.changePasswordForm.email.value).subscribe(res => {
-    //   this.status = true;
-    //   return res;
-    // }, error => {
-    //   this.status = false;
-    //   return error.message;
-    // });
+    this.load = true;
+    return this.userService.sendMailforChangePassword({ email: this.changePasswordForm.email.value }).subscribe(res => {
+      this.status = true;
+      this.load = false;
+      return res;
+    }, error => {
+      this.status = false;
+      this.load = false;
+      return error.message;
+    });
   }
 }

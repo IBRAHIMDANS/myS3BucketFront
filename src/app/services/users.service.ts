@@ -69,4 +69,25 @@ export class UsersService {
         )
       );
   }
+  public sendMailforChangePassword(
+    {
+      email,
+    }: User): Observable<any> {
+    return this.httpClient
+      .post(`${environment.backEndApi}/auth/checkPassword`, {
+          email: toLower(email),
+        },
+        this.httpOption
+      )
+      .pipe(
+        map(res => {
+            console.log(res);
+            return res;
+          },
+          catchError(err => {
+            return err;
+          })
+        )
+      );
+  }
 }
