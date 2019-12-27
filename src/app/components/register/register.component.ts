@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     validator: MustMatch('password', 'passwordConfirm')
   });
   public error: any;
-  private hidden: boolean;
+  public hidden: boolean;
 
   constructor(private route: ActivatedRoute,
               private router: Router, private formBuilder: FormBuilder, private userService: UsersService) {

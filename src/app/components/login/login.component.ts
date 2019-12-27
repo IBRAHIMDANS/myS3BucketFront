@@ -12,7 +12,7 @@ import { ResetPasswordComponent } from '../reset-password/reset-password.compone
 })
 export class LoginComponent implements OnInit {
   public error: undefined;
-  private hidden: boolean;
+  public hidden: boolean;
   public userForm = this.formBuilder.group({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(4)]),
