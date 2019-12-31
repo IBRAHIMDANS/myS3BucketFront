@@ -21,7 +21,8 @@ import {
   MatInputModule,
   MatMenuModule,
   MatProgressSpinnerModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTableModule
 } from '@angular/material';
 import { Error404Component } from './components/error404/error404.component';
 import { ButtonModule, OverlayPanelModule } from 'primeng';
@@ -64,7 +65,8 @@ import { HomeComponent } from './pages/home/home.component';
     MatCardModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTableModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
