@@ -52,7 +52,8 @@ export class LoginComponent implements OnInit {
         password: this.userForm.controls.password.value
       }).subscribe(res => {
         this.hidden = false;
-        return res;
+        this.router.navigate(['/', 'home']);
+        return localStorage.setItem('token', res.meta.token);
       }, error => {
         console.log(error);
         this.error = error;

@@ -15,7 +15,8 @@ import {
   MatBadgeModule,
   MatButtonModule,
   MatButtonToggleModule,
-  MatCardModule, MatDialogModule,
+  MatCardModule,
+  MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
@@ -29,7 +30,9 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { HomeComponent } from './pages/home/home.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { BucketsModule } from './modules/buckets/buckets.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     Error404Component,
     LoginComponent,
     ResetPasswordComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,15 +66,18 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     MatCardModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatBadgeModule
+    MatBadgeModule,
+    BucketsModule,
+  ],
+  exports: [
+    RegisterComponent
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: MAT_DIALOG_DATA, useValue: [] },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
   ],
   bootstrap: [AppComponent],
   entryComponents: [ResetPasswordComponent]

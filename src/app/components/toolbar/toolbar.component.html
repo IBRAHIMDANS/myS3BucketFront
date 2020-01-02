@@ -1,8 +1,8 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row class="app-toolbar">
-    <mat-card-title>myS3 Bucket </mat-card-title>
-<!--    <button mat-button type="text" routerLink="/login">-->
-<!--      <mat-icon class="example-icon" aria-hidden="false" aria-label="login"> account_circle</mat-icon>-->
-<!--    </button>-->
+  <mat-toolbar-row  class="app-toolbar" [className]="isLogged() ? 'app-toolbar' : 'app-connect' ">
+    <mat-card-title>myS3 Bucket</mat-card-title>
+    <button mat-button type="text" *ngIf="isLogged()" (click)="disconnect()">
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="logOut"> logout</mat-icon>
+    </button>
   </mat-toolbar-row>
 </mat-toolbar>
