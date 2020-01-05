@@ -39,6 +39,7 @@ export class ToolbarComponent implements OnInit {
 
   goToProfil() {
     console.log(this.trigger);
+    return this.router.navigate(['/', 'profil']);
   }
 
   disconnect() {

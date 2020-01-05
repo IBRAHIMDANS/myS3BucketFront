@@ -34,6 +34,7 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import { BucketsModule } from './modules/buckets/buckets.module';
 import { DrawerComponent } from './components/drawer/drawer.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ProfilComponent } from './components/profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { HomeComponent } from './pages/home/home.component';
     ChangePasswordComponent,
     DrawerComponent,
     HomeComponent,
+    ProfilComponent,
   ],
   imports: [
     BrowserModule,
