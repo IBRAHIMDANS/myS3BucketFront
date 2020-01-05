@@ -1,7 +1,7 @@
 <mat-toolbar color="primary" [ngClass]="isLogged() ? 'app-toolbar' : 'app-connect' ">
   <mat-card-title>myS3 Bucket</mat-card-title>
   <div *ngIf="isLogged()">
-    <button mat-button type="text" *ngIf="isLogged()" (click)="disconnect()">
+    <button mat-button type="text" *ngIf="isLogged()" (click)="goToProfil()">
       <mat-icon class="example-icon" aria-hidden="false" aria-label="logOut"> logout</mat-icon>
       Profil
     </button>
@@ -11,6 +11,3 @@
     </button>
   </div>
 </mat-toolbar>
-<!--    <button mat-button type="text" *ngIf="isLogged()" (click)="onClickMenu($event)">-->
-<!--      <mat-icon aria-hidden="false" aria-label="menu"> menu</mat-icon>-->
-<!--    </button>-->

@@ -33,14 +33,14 @@ export class ToolbarComponent implements OnInit {
     }
   }
 
-  someMethod() {
-    this.trigger.openMenu();
-    console.log(this.trigger);
-  }
-
   isLogged(): boolean {
     return !!localStorage.getItem('token');
   }
+
+  goToProfil() {
+    console.log(this.trigger);
+  }
+
   disconnect() {
     localStorage.removeItem('token');
     return this.router.navigate(['/', 'login']);
