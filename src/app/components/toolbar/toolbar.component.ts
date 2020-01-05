@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { DrawerService } from '../../services/drawer.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,12 +11,26 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ToolbarComponent implements OnInit {
   @ViewChild(MatMenuTrigger, { static: false }) trigger: MatMenuTrigger;
+  private drawerOpenedSubscription: Subscription;
+  private opened: boolean;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router, private drawerService: DrawerService) {
   }
 
   ngOnInit() {
     this.isLogged();
+    this.drawerOpenedSubscription = this.drawerService.whenDrawerChanges()
+      .subscribe(opened => this.opened = opened);
+
+  }
+  public onClickMenu(e: Event): void {
+    e.preventDefault();
+
+    if (this.opened) {
+      this.drawerService.close();
+    } else {
+      this.drawerService.open();
+    }
   }
 
   someMethod() {

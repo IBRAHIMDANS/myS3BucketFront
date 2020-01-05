@@ -1,0 +1,18 @@
+<div class="app-content">
+  <form (submit)="submit($event)">
+    <mat-card-title>Create a Bucket</mat-card-title>
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <label>
+        <input [formControl]="name" matInput name="login" required/>
+      </label>
+      <mat-error *ngIf="name.invalid">name is incorrect.</mat-error>
+    </mat-form-field>
+    <div class="app-action-container">
+      <button mat-raised-button type="submit" [disabled]=" name.invalid">
+        <mat-icon aria-hidden="false"> save</mat-icon>
+      </button>
+      <button (click)="onClose($event)" mat-raised-button><mat-icon color="warn" aria-hidden="false"> cancel</mat-icon> </button>
+    </div>
+  </form>
+</div>

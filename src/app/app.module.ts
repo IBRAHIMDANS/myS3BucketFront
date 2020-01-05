@@ -19,9 +19,9 @@ import {
   MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule,
+  MatInputModule, MatListModule,
   MatMenuModule,
-  MatProgressSpinnerModule,
+  MatProgressSpinnerModule, MatSidenavModule,
   MatToolbarModule
 } from '@angular/material';
 import { Error404Component } from './components/error404/error404.component';
@@ -30,9 +30,10 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { HomeComponent } from './pages/home/home.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { BucketsModule } from './modules/buckets/buckets.module';
+import { DrawerComponent } from './components/drawer/drawer.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -43,13 +44,13 @@ import { BucketsModule } from './modules/buckets/buckets.module';
     LoginComponent,
     ResetPasswordComponent,
     ChangePasswordComponent,
+    DrawerComponent,
     HomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    BrowserModule,
     FormsModule,
     MatToolbarModule,
     MatIconModule,
@@ -58,7 +59,6 @@ import { BucketsModule } from './modules/buckets/buckets.module';
     OverlayPanelModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    FormsModule,
     HttpClientModule,
     MatInputModule,
     ButtonModule,
@@ -68,9 +68,12 @@ import { BucketsModule } from './modules/buckets/buckets.module';
     MatDialogModule,
     MatBadgeModule,
     BucketsModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   exports: [
-    RegisterComponent
+    RegisterComponent,
+    Error404Component
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

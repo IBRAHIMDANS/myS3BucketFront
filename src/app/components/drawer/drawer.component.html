@@ -1,0 +1,21 @@
+<mat-drawer-container class="app-drawer-container">
+  <mat-drawer (closed)="onCloseDrawer()" [opened]="opened | async" class="app-drawer" mode="over">
+    <div class="app-drawer-header">
+      <button [disableRipple]="true" (click)="onClickDrawerTimes($event)" class="app-drawer-close" color="primary" mat-icon-button>
+        <mat-icon>close</mat-icon>
+      </button>
+      <img alt="logo GoodMoov" class="app-drawer-logo" mat-card-image src='assets/img/logo GoodMoov without text.png'>
+    </div>
+    <div class="app-drawer-content">
+      <mat-list>
+        <mat-list-item>
+          <a (click)="onClickRouterLink($event)" [routerLink]="['/', 'search']" class="app-drawer-link"
+             mat-button routerLinkActive="app-drawer-link-active">Rechercher</a>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content class="app-drawer-main-content">
+    <ng-content></ng-content>
+  </mat-drawer-content>
+</mat-drawer-container>

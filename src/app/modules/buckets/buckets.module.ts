@@ -3,13 +3,36 @@ import { CommonModule } from '@angular/common';
 
 import { BucketsRoutingModule } from './buckets-routing.module';
 import { BucketsComponent } from '../../components/buckets/buckets.component';
+import { HomeComponent } from '../../pages/home/home.component';
+import { MatButtonModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatIconModule } from '@angular/material';
+import { CreateBucketComponent } from '../../components/create-bucket/create-bucket.component';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [BucketsComponent],
+  declarations: [
+    BucketsComponent,
+    CreateBucketComponent
+  ],
+  exports: [
+    BucketsComponent
+  ],
   imports: [
     CommonModule,
-    BucketsRoutingModule
+    BucketsRoutingModule,
+    FormsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
+  ],
+  entryComponents: [
+    CreateBucketComponent
   ]
 })
 export class BucketsModule {
