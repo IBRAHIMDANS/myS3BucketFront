@@ -21,7 +21,8 @@ import {
   MatIconModule,
   MatInputModule, MatListModule,
   MatMenuModule,
-  MatProgressSpinnerModule, MatSidenavModule,
+  MatProgressSpinnerModule,
+  MatSidenavModule,
   MatToolbarModule
 } from '@angular/material';
 import { Error404Component } from './components/error404/error404.component';

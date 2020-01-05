@@ -1,6 +1,7 @@
 <mat-toolbar color="primary" [ngClass]="isLogged() ? 'app-toolbar' : 'app-connect' ">
   <mat-card-title>myS3 Bucket</mat-card-title>
   <div *ngIf="isLogged()">
+      {{ isLogged ? "My Account" : "Login / Register" }}
     <button mat-button type="text" *ngIf="isLogged()" (click)="goToProfil()">
       <mat-icon class="example-icon" aria-hidden="false" aria-label="account_circle"> account_circle</mat-icon>
       Profil
