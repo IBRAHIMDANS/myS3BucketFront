@@ -90,4 +90,20 @@ export class UsersService {
         )
       );
   }
+
+  public getInfos({ uuid }: User): Observable<any> {
+    return this.httpClient
+      .get(`${environment.backEndApi}/users/${uuid}`,
+        this.httpOption
+      )
+      .pipe(
+        map(res => {
+            return res;
+          },
+          catchError(err => {
+            return err;
+          })
+        )
+      );
+  }
 }

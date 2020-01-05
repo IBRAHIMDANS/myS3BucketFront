@@ -11,8 +11,8 @@ export class AdminGuard implements CanActivate, CanLoad {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    console.log('expire date', decodeToken(localStorage.getItem('token')).exp);
-    console.log('timestamp', moment().unix());
+    // console.log('expire date', decodeToken(localStorage.getItem('token')).exp);
+    // console.log('timestamp', moment().unix());
     return moment().unix() < decodeToken(localStorage.getItem('token')).exp;
   }
 

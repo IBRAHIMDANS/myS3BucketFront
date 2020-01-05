@@ -32,7 +32,21 @@ export class BucketService {
       )
       .pipe(
         map(res => {
-            console.log(res);
+            return res;
+          },
+          catchError(err => {
+            return err;
+          })
+        )
+      );
+  }
+  public getAllBucket(): Observable<any> {
+    return this.httpClient
+      .get(`${environment.backEndApi}/bucket`,
+        this.httpOptions
+      )
+      .pipe(
+        map(res => {
             return res;
           },
           catchError(err => {
