@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { DrawerService } from '../../services/drawer.service';
 import { UsersService } from 'src/app/services/users.service';
 import { decodeToken } from 'src/app/helpers/token';
+import { User } from '../../interfaces/user.interfaces';
+import { toUpper } from 'lodash';
 
 @Component({
   selector: 'app-toolbar',
@@ -16,9 +18,10 @@ export class ToolbarComponent implements OnInit {
   private drawerOpenedSubscription: Subscription;
   private opened: boolean;
 
-  public nickname: String;
+  public nickname: string;
 
-  constructor(private route: ActivatedRoute, private router: Router, private drawerService: DrawerService, private userService: UsersService) {
+  constructor(private route: ActivatedRoute, private router: Router,
+              private drawerService: DrawerService, private userService: UsersService) {
   }
 
   ngOnInit() {
@@ -26,7 +29,7 @@ export class ToolbarComponent implements OnInit {
     this.drawerOpenedSubscription = this.drawerService.whenDrawerChanges()
       .subscribe(opened => this.opened = opened);
     this.userService.getInfos({ uuid: decodeToken().uuid }).subscribe((res: User) => {
-      return this.nickname = res.nickname;
+      return this.nickname = toUpper(res.nickname);
     }, error => {
       console.log(error);
       return error;
