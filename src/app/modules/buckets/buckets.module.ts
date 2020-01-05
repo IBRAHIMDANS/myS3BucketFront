@@ -9,13 +9,14 @@ import {
   MatCardModule,
   MatDialogModule,
   MatFormFieldModule,
-  MatIconModule, MatPaginatorModule,
+  MatIconModule, MatPaginatorModule, MatProgressBarModule,
   MatSortModule,
-  MatTableModule
+  MatTableModule, MatTreeModule
 } from '@angular/material';
 import { CreateBucketComponent } from '../../components/create-bucket/create-bucket.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TreeModule } from 'primeng';
 
 
 @NgModule({
@@ -40,7 +41,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    TreeModule,
+    MatTreeModule,
+    MatProgressBarModule
   ],
   entryComponents: [
     CreateBucketComponent
