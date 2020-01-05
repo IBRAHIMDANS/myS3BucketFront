@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
         password: this.userForm.controls.password.value
       }).subscribe(res => {
         this.hidden = false;
-        this.router.navigate(['/', 'bucket', 'home']);
+        this.router.navigate(['/', 'home']);
         return localStorage.setItem('token', res.meta.token);
       }, error => {
         console.log(error);
