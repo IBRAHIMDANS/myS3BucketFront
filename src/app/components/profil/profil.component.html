@@ -2,19 +2,19 @@
     <div class="example-container">
         <mat-card-title class="app-connexion-title"> Profil</mat-card-title>
         <mat-form-field>
-            <input matInput placeholder="username">
+            <input matInput placeholder="username" [formControl]="userForm.controls.nickname" disabled>
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="email">
+            <input matInput placeholder="email"  [formControl]="userForm.controls.email" disabled>
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="old password">
+            <input matInput placeholder="old password" disabled>
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="new password">
+            <input matInput placeholder="new password" disabled>
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="confirm new password">
+            <input matInput placeholder="confirm new password" disabled>
         </mat-form-field>
     </div>
 </div>
