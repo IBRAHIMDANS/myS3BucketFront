@@ -6,7 +6,7 @@
   <div *ngIf="isLogged()">
     <button mat-button type="text" *ngIf="isLogged()" (click)="goToProfil()">
       <mat-icon class="example-icon" aria-hidden="false" aria-label="account_circle"> account_circle</mat-icon>
-      Profil
+      userForm.controls.nickname
     </button>
     <button mat-button type="text" *ngIf="isLogged()" (click)="disconnect()">
       <mat-icon class="example-icon" aria-hidden="false" aria-label="logOut"> logout</mat-icon>

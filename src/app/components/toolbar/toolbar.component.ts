@@ -3,6 +3,8 @@ import { MatMenuTrigger } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DrawerService } from '../../services/drawer.service';
+import { UsersService } from 'src/app/services/users.service';
+import { decodeToken } from 'src/app/helpers/token';
 
 @Component({
   selector: 'app-toolbar',
@@ -14,14 +16,21 @@ export class ToolbarComponent implements OnInit {
   private drawerOpenedSubscription: Subscription;
   private opened: boolean;
 
-  constructor(private route: ActivatedRoute, private router: Router, private drawerService: DrawerService) {
+  public nickname: String;
+
+  constructor(private route: ActivatedRoute, private router: Router, private drawerService: DrawerService, private userService: UsersService) {
   }
 
   ngOnInit() {
     this.isLogged();
     this.drawerOpenedSubscription = this.drawerService.whenDrawerChanges()
       .subscribe(opened => this.opened = opened);
-
+    this.userService.getInfos({ uuid: decodeToken().uuid }).subscribe((res: User) => {
+      return this.nickname = res.nickname;
+    }, error => {
+      console.log(error);
+      return error;
+    });
   }
   public onClickMenu(e: Event): void {
     e.preventDefault();
