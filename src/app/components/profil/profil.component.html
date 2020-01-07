@@ -1,20 +1,9 @@
-<div class="app-login-container">
+<div class="app-profil-container">
     <div class="example-container">
-        <mat-card-title class="app-connexion-title"> Profil</mat-card-title>
-        <mat-form-field>
-            <input matInput placeholder="username" [formControl]="userForm.controls.nickname" disabled>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="email"  [formControl]="userForm.controls.email" disabled>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="old password" disabled>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="new password" disabled>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="confirm new password" disabled>
-        </mat-form-field>
+        <mat-card-title class="app-connexion-title"> Pseudo</mat-card-title>
+        <mat-card>userForm.controls.nickname</mat-card>
+        <mat-card-title class="app-connexion-title"> E-mail</mat-card-title>
+        <mat-card text="userForm.controls.email">{{userForm.controls.nickname}}</mat-card>
+        <button mat-button>Change password</button>
     </div>
 </div>
