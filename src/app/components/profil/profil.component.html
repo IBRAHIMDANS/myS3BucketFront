@@ -1,9 +1,9 @@
 <div class="app-profil-container">
     <div class="example-container">
-        <mat-card-title class="app-connexion-title"> Pseudo</mat-card-title>
+        <mat-card-title class="app-connexion-title"> Nickname</mat-card-title>
         <mat-card>userForm.controls.nickname</mat-card>
         <mat-card-title class="app-connexion-title"> E-mail</mat-card-title>
         <mat-card text="userForm.controls.email">{{userForm.controls.nickname}}</mat-card>
-        <button mat-button>Change password</button>
+        <button mat-button (click)="changePassword()">Change password</button>
     </div>
 </div>

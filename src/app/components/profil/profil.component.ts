@@ -30,6 +30,10 @@ export class ProfilComponent implements OnInit {
     });
   }
 
+  changePassword() {
+    return this.router.navigate(['/', 'changePassword']);
+  }
+
   submitFrom(e: Event) {
     e.preventDefault();
     // return this.userService
