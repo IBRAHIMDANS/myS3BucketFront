@@ -1,16 +1,14 @@
 <mat-toolbar color="primary" [ngClass]="isLogged() ? 'app-toolbar' : 'app-connect' ">
-  <button mat-button type="text" *ngIf="isLogged()" routerLink="bucket">
-    <mat-icon class="example-icon" aria-hidden="false" aria-label="account_circle"> home</mat-icon>
-  </button>
-  <mat-card-title>myS3 Bucket</mat-card-title>
+  <mat-icon class="example-icon" *ngIf="isLogged()" (click)="goToHome()" aria-hidden="false" aria-label="account_circle">
+    home
+  </mat-icon>
+  <span>myS3 Bucket</span>
   <div *ngIf="isLogged()">
-    <button mat-button type="text" *ngIf="isLogged()" (click)="goToProfil()">
-      <mat-icon class="example-icon" aria-hidden="false" aria-label="account_circle"> account_circle</mat-icon>
-      {{nickname ? nickname : 'Profil'}}
-    </button>
-    <button mat-button type="text" *ngIf="isLogged()" (click)="disconnect()">
-      <mat-icon class="example-icon" aria-hidden="false" aria-label="logOut"> logout</mat-icon>
-      log-out
-    </button>
+    <mat-icon class="app-profil" *ngIf="isLogged()" (click)="goToProfil()" aria-hidden="true"
+              [attr.aria-label]="nickname ? nickname : 'Profil'"> account_circle
+    </mat-icon>
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="log-out" *ngIf="isLogged()" (click)="disconnect()">
+      logout
+    </mat-icon>
   </div>
 </mat-toolbar>

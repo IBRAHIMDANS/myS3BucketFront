@@ -53,6 +53,9 @@ export class ToolbarComponent implements OnInit {
     console.log(this.trigger);
     return this.router.navigate(['/', 'profil']);
   }
+  goToHome() {
+    return this.router.navigate(['/', 'bucket']);
+  }
 
   disconnect() {
     localStorage.removeItem('token');

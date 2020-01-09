@@ -1,4 +1,10 @@
-<mat-form-field>
+<div class="app-header">
+  <button mat-button type="text" (click)="openCreateBucket($event)">
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="folder"> create_new_folder </mat-icon>
+    <span> Create a Bucket </span>
+  </button>
+</div>
+<mat-form-field class="app-search">
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
 </mat-form-field>
 <div class="mat-elevation-z8">
@@ -9,33 +15,25 @@
     </ng-container>
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> name</th>
-      <td mat-cell *matCellDef="let row" class="app-mat-header"> {{row.name}}</td>
+      <td mat-cell *matCellDef="let row" > {{row.name}}</td>
     </ng-container>
     <ng-container matColumnDef="size">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Size</th>
-      <td mat-cell *matCellDef="let row" class="app-mat-header"> </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Manage </th>
+      <td mat-cell *matCellDef="let row" class="app-table-manage">
+        <button mat-raised-button (click)="openBucket(row)" >
+          <mat-icon aria-hidden="false" > folder_open </mat-icon>
+        </button>
+        <button mat-raised-button (click)="editBucket(row)">
+          <mat-icon aria-hidden="false" > edit</mat-icon>
+        </button>
+        <button mat-raised-button (click)="deleteBucket(row)">
+          <mat-icon aria-hidden="false"> delete </mat-icon>
+        </button>
+      </td>
     </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-    </tr>
+    <tr  class="example-element-row" mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="openBucket(row)"></tr>
   </table>
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-<!--  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">-->
-<!--    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>-->
-<!--      <button mat-icon-button disabled></button>-->
-<!--      {{node.item}}-->
-<!--    </mat-tree-node>-->
-<!--    <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>-->
-<!--      <button mat-icon-button-->
-<!--              [attr.aria-label]="'toggle ' + node.filename" matTreeNodeToggle>-->
-<!--        <mat-icon class="mat-icon-rtl-mirror">-->
-<!--          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}-->
-<!--        </mat-icon>-->
-<!--      </button>-->
-<!--      {{node.item}}-->
-<!--      <mat-progress-bar *ngIf="node.isLoading"-->
-<!--                        mode="indeterminate"-->
-<!--                        class="example-tree-progress-bar"></mat-progress-bar>-->
-<!--    </mat-tree-node>-->
-<!--  </mat-tree>-->
 </div>

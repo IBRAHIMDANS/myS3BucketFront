@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { BucketService } from '../../services/bucket.service';
@@ -6,7 +6,8 @@ import { BucketService } from '../../services/bucket.service';
 @Component({
   selector: 'app-create-bucket',
   templateUrl: './create-bucket.component.html',
-  styleUrls: ['./create-bucket.component.scss']
+  styleUrls: ['./create-bucket.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CreateBucketComponent implements OnInit {
   public error: undefined;
@@ -15,7 +16,7 @@ export class CreateBucketComponent implements OnInit {
 
   constructor(private bucketService: BucketService,
               public dialogRef: MatDialogRef<CreateBucketComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) {
+              @Inject(MAT_DIALOG_DATA) public data, ) {
   }
 
   ngOnInit() {
@@ -23,7 +24,7 @@ export class CreateBucketComponent implements OnInit {
 
   public onClose(event: Event): void {
     event.preventDefault();
-    this.dialogRef.close();
+    this.dialogRef.close(null);
   }
 
   public submit(e: Event) {
@@ -31,7 +32,7 @@ export class CreateBucketComponent implements OnInit {
     return this.bucketService.addBucket({
       name: this.name.value,
     }).subscribe(res => {
-      this.dialogRef.close();
+      this.dialogRef.close(this.name.value);
       return res;
     }, error => {
       return error;

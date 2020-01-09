@@ -1,0 +1,17 @@
+.app-action-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.app-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.app-content {
+  width: 10vw;
+}
+.mat-dialog-container {
+  border-radius: 20px;
+}
