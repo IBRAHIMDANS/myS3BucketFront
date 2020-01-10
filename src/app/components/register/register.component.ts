@@ -46,8 +46,6 @@ export class RegisterComponent implements OnInit {
         email: this.userForm.value.email
       })
       .subscribe(res => {
-        // console.log(res);
-        // localStorage.setItem('token', res.meta.token);
         this.router.navigate(['/', 'login']);
         return res;
       }, error => {

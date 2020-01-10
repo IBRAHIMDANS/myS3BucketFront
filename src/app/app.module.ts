@@ -4,9 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RegisterComponent } from './components/register/register.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { HttpClientModule } from '@angular/common/http';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import {
   MAT_DATE_FORMATS,
@@ -16,20 +15,25 @@ import {
   MatButtonModule,
   MatButtonToggleModule,
   MatCardModule,
-  MatDialogModule, MatExpansionModule,
-  MatFormFieldModule, MatGridListModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatGridListModule,
   MatIconModule,
-  MatInputModule, MatListModule,
+  MatInputModule,
+  MatListModule,
   MatMenuModule,
   MatProgressSpinnerModule,
   MatSidenavModule,
   MatToolbarModule
 } from '@angular/material';
-import { Error404Component } from './components/error404/error404.component';
-import { ButtonModule, OverlayPanelModule } from 'primeng';
-import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { ButtonModule, OverlayPanelModule } from 'primeng';
+// component
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { RegisterComponent } from './components/register/register.component';
+import { Error404Component } from './components/error404/error404.component';
+import { LoginComponent } from './components/login/login.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { BucketsModule } from './modules/buckets/buckets.module';
@@ -51,7 +55,7 @@ import { ProfilComponent } from './components/profil/profil.component';
     ProfilComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -86,9 +90,14 @@ import { ProfilComponent } from './components/profil/profil.component';
     { provide: MAT_DIALOG_DATA, useValue: [] },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+    { provide: 'LOCALSTORAGE', useFactory: getLocalStorage }
   ],
   bootstrap: [AppComponent],
   entryComponents: [ResetPasswordComponent]
 })
 export class AppModule {
+}
+
+export function getLocalStorage() {
+  return (typeof window !== 'undefined') ? window.localStorage : null;
 }

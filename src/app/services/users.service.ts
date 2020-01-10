@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -13,7 +13,7 @@ export class UsersService {
 
   private httpOption;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, @Inject(PLATFORM_ID) private platformId: any) {
     this.httpOption = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin': '*',
@@ -81,7 +81,6 @@ export class UsersService {
       )
       .pipe(
         map(res => {
-            console.log(res);
             return res;
           },
           catchError(err => {

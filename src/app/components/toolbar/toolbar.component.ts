@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -7,6 +7,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { decodeToken } from 'src/app/helpers/token';
 import { User } from '../../interfaces/user.interfaces';
 import { toUpper } from 'lodash';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-toolbar',
@@ -21,7 +22,7 @@ export class ToolbarComponent implements OnInit {
   public nickname: string;
 
   constructor(private route: ActivatedRoute, private router: Router,
-              private drawerService: DrawerService, private userService: UsersService) {
+              private drawerService: DrawerService, private userService: UsersService, @Inject(PLATFORM_ID) private platformId: any) {
   }
 
   ngOnInit() {
@@ -31,7 +32,6 @@ export class ToolbarComponent implements OnInit {
     this.userService.getInfos({ uuid: decodeToken().uuid }).subscribe((res: User) => {
       return this.nickname = toUpper(res.nickname);
     }, error => {
-      console.log(error);
       return error;
     });
   }
@@ -46,11 +46,12 @@ export class ToolbarComponent implements OnInit {
   }
 
   isLogged(): boolean {
-    return !!localStorage.getItem('token');
+    if (isPlatformBrowser(this.platformId)) {
+      return !!localStorage.getItem('token');
+    }
   }
 
   goToProfil() {
-    console.log(this.trigger);
     return this.router.navigate(['/', 'profil']);
   }
   goToHome() {
@@ -58,7 +59,9 @@ export class ToolbarComponent implements OnInit {
   }
 
   disconnect() {
-    localStorage.removeItem('token');
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('token');
+    }
     return this.router.navigate(['/', 'login']);
   }
 

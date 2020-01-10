@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { UsersService } from '../../services/users.service';
 import { ResetPasswordComponent } from '../reset-password/reset-password.component';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
-              private router: Router, public dialog: MatDialog, private userService: UsersService) {
+              private router: Router, public dialog: MatDialog, private userService: UsersService,
+              @Inject(PLATFORM_ID) private platformId: any) {
   }
 
   resetPassword(event: Event): void {
@@ -53,7 +55,9 @@ export class LoginComponent implements OnInit {
       }).subscribe(res => {
         this.hidden = false;
         this.router.navigate(['/', 'home']);
-        return localStorage.setItem('token', res.meta.token);
+        if (isPlatformBrowser(this.platformId)) {
+          return localStorage.setItem('token', res.meta.token);
+        }
       }, error => {
         console.log(error);
         this.error = error;

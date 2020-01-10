@@ -1,33 +1,32 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { decodeToken } from '../helpers/token';
 import * as moment from 'moment';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminGuard implements CanActivate, CanLoad {
-  constructor(private router: Router) {
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: any) {
   }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    // console.log('expire date', decodeToken(localStorage.getItem('token')).exp);
-    // console.log('timestamp', moment().unix());
-    if (!localStorage.getItem('token')) {
-     // window.location.assign('/login');
-      this.router.navigate(['login']);
-      return false;
-    }
-    if (moment().unix() < decodeToken(localStorage.getItem('token')).exp) {
-      return true;
-    } else {
-      localStorage.removeItem('token');
-      this.router.navigate(['login']);
-      // window.location.assign('/login');
-      return false;
+    if (isPlatformBrowser(this.platformId)) {
+      if (!localStorage.getItem('token')) {
+        this.router.navigate(['login']);
+        return false;
+      }
+      if (moment().unix() < decodeToken(localStorage.getItem('token')).exp) {
+        return true;
+      } else {
+        localStorage.removeItem('token');
+        this.router.navigate(['login']);
+        return false;
+      }
     }
   }
 
