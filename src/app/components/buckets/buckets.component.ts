@@ -3,14 +3,9 @@ import { BucketService } from '../../services/bucket.service';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Bucket } from '../../interfaces/bucket.interfaces';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CreateBucketComponent } from '../create-bucket/create-bucket.component';
+import { ManageBucketComponent } from '../manage-bucket/manage-bucket.component';
 import { ActivatedRoute, Router } from '@angular/router';
 
-export class DynamicFlatNode {
-  constructor(public item: string, public level = 1, public expandable = false,
-              public isLoading = false) {
-  }
-}
 
 @Component({
   selector: 'app-buckets',
@@ -39,17 +34,19 @@ export class BucketsComponent implements OnInit {
 
   public openCreateBucket(e: Event) {
     e.preventDefault();
-    this.dialog.open(CreateBucketComponent, {
+    this.dialog.open(ManageBucketComponent, {
       autoFocus: true,
       disableClose: true,
       data: {
-        title: 'Create a bucket',
+        title: 'Create',
       }
     }).afterClosed().subscribe(res => {
-      this.optimistic = res;
-      this.dataSource.data.push({ name: this.optimistic, id: null });
-      this.dataSource.paginator = this.paginator;
-      this.refresh();
+      if (res !== null) {
+        this.optimistic = res;
+        this.dataSource.data.push({ name: this.optimistic, id: null });
+        this.dataSource.paginator = this.paginator;
+        this.refresh();
+      }
     });
   }
 
@@ -57,16 +54,46 @@ export class BucketsComponent implements OnInit {
     this.refresh();
   }
 
-  editBucket(row) {
-    console.log(row);
+  editBucket(e: Event, row) {
+    e.preventDefault();
+    this.dialog.open(ManageBucketComponent, {
+      autoFocus: true,
+      disableClose: true,
+      data: {
+        title: 'Edit',
+        infos: row
+      }
+    }).afterClosed().subscribe(res => {
+      if (res !== null) {
+        this.optimistic = res;
+        this.dataSource.data.push({ name: this.optimistic, id: null });
+        this.dataSource.paginator = this.paginator;
+        this.refresh();
+      }
+    });
   }
 
-  openBucket(row) {
-    console.log(row);
+  openBucket(e: Event, row) {
+    return this.router.navigate(['/', 'bucket', row.id]);
   }
 
-  deleteBucket(row) {
-    console.log(row);
+  deleteBucket(e: Event, row) {
+    e.preventDefault();
+    this.dialog.open(ManageBucketComponent, {
+      autoFocus: true,
+      disableClose: true,
+      data: {
+        title: 'Delete',
+        infos: row
+      }
+    }).afterClosed().subscribe(res => {
+      if (res !== null) {
+        this.optimistic = res;
+        this.dataSource.data = this.dataSource.data.filter(i => i.id !== row.id);
+        this.dataSource.paginator = this.paginator;
+        this.refresh();
+      }
+    });
   }
 
   applyFilter(filterValue: string) {
@@ -79,7 +106,6 @@ export class BucketsComponent implements OnInit {
 
   refresh() {
     this.bucketService.getAllBucket().subscribe(res => {
-      console.log(res);
       this.data = res;
       this.dataSource = new MatTableDataSource<Bucket>(res);
     }, error => {

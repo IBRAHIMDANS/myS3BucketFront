@@ -1,5 +1,5 @@
 export interface Bucket {
   id?: string;
-  name: string;
+  name?: string;
   userUuid?: string;
 }

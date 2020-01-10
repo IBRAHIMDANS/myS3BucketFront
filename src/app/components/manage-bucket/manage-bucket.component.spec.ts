@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateBucketComponent } from './create-bucket.component';
+import { CreateBucketComponent } from './manage-bucket.component';
 
 describe('CreateBucketComponent', () => {
   let component: CreateBucketComponent;

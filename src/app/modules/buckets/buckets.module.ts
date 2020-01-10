@@ -3,29 +3,34 @@ import { CommonModule } from '@angular/common';
 
 import { BucketsRoutingModule } from './buckets-routing.module';
 import { BucketsComponent } from '../../components/buckets/buckets.component';
-import { HomeComponent } from '../../pages/home/home.component';
 import {
   MatButtonModule,
   MatCardModule,
   MatDialogModule,
   MatFormFieldModule,
-  MatIconModule, MatPaginatorModule, MatProgressBarModule,
+  MatIconModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
   MatSortModule,
-  MatTableModule, MatTreeModule
+  MatTableModule,
+  MatTreeModule
 } from '@angular/material';
-import { CreateBucketComponent } from '../../components/create-bucket/create-bucket.component';
+import { ManageBucketComponent } from '../../components/manage-bucket/manage-bucket.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TreeModule } from 'primeng';
+import { BucketComponent } from '../../components/bucket/bucket.component';
 
 
 @NgModule({
   declarations: [
     BucketsComponent,
-    CreateBucketComponent
+    ManageBucketComponent,
+    BucketComponent,
   ],
   exports: [
-    BucketsComponent
+    BucketsComponent,
+    BucketComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +52,7 @@ import { TreeModule } from 'primeng';
     MatProgressBarModule
   ],
   entryComponents: [
-    CreateBucketComponent
+    ManageBucketComponent
   ]
 })
 export class BucketsModule {

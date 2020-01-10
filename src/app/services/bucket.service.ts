@@ -40,6 +40,38 @@ export class BucketService {
         )
       );
   }
+  public editBucket({id, name }: Bucket): Observable<any> {
+    return this.httpClient
+      .put(`${environment.backEndApi}/bucket/${id}`, {
+          name: toLower(name),
+        },
+        this.httpOptions
+      )
+      .pipe(
+        map(res => {
+            return res;
+          },
+          catchError(err => {
+            return err;
+          })
+        )
+      );
+  }
+  public deleteBucket({id }: Bucket): Observable<any> {
+    return this.httpClient
+      .delete(`${environment.backEndApi}/bucket/${id}`,
+        this.httpOptions
+      )
+      .pipe(
+        map(res => {
+            return res;
+          },
+          catchError(err => {
+            return err;
+          })
+        )
+      );
+  }
   public getAllBucket(): Observable<any> {
     return this.httpClient
       .get(`${environment.backEndApi}/bucket`,

@@ -20,7 +20,8 @@ const routes: Routes = [
   },
   {
     path: 'changePassword',
-    component: ChangePasswordComponent
+    component: ChangePasswordComponent,
+    canActivate: [AdminGuard],
   },
   {
     path: 'profil',
@@ -40,7 +41,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'login'
+    redirectTo: 'home'
   },
   {
     path: '**',

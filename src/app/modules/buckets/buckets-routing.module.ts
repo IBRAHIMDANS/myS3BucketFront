@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { BucketsComponent } from '../../components/buckets/buckets.component';
+import { BucketComponent } from '../../components/bucket/bucket.component';
 
 
 const routes: Routes = [
   { path: '', component: BucketsComponent },
-  { path: ':id', component: BucketsComponent },
+  { path: ':id', component: BucketComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class BucketsRoutingModule { }
+export class BucketsRoutingModule {
+}
