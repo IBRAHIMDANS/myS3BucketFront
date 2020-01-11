@@ -12,14 +12,14 @@
       <label>
         <input matInput name="email" [formControl]="userForm.controls.email" required>
       </label>
-      <mat-error *ngIf=" userForm.controls.email.errors?.required "> Merci de saisir les champs obligatoires</mat-error>
+      <mat-error *ngIf=" userForm.controls.email.errors?.required "> Please enter the required fields</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Password</mat-label>
       <label>
         <input matInput name="password" [formControl]="userForm.controls.password" required type="password">
       </label>
-      <mat-error *ngIf=" userForm.controls.password.errors?.required "> Merci de saisir les champs obligatoires
+      <mat-error *ngIf=" userForm.controls.password.errors?.required "> Please enter the required fields
       </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
@@ -29,19 +29,19 @@
                type="password">
       </label>
     </mat-form-field>
-    <mat-error *ngIf="!checkPasswords()  ">Les mots de passe ne
-      correspondent pas
+    <mat-error *ngIf="!checkPasswords()  ">Passwords doesn't
+    match
     </mat-error>
-    <mat-error *ngIf="error"> Impossible de s'inscrire l'email doit etre unique</mat-error>
+    <mat-error *ngIf="error"> Unable to register email must be unique</mat-error>
     <div class="btn-form">
-      <button type="submit" color="accent" mat-raised-button *ngIf="!hidden" [disabled]="userForm.invalid"> S'inscrire
+      <button type="submit" color="accent" mat-raised-button *ngIf="!hidden" [disabled]="userForm.invalid"> Register
       </button>
       <mat-progress-spinner class="spinner" color="warn" diameter="25" *ngIf="hidden"
                             mode="indeterminate"></mat-progress-spinner>
     </div>
     <div class="app-home-container">
-      <span> Déjà inscrit(e) ? </span>
-      <span [routerLink]="['/', 'login']" class="app-text">&nbsp; S'identifier</span>
+      <span> Already registered ? </span>
+      <span [routerLink]="['/', 'login']" class="app-text">&nbsp; Log in</span>
     </div>
   </form>
 </div>

@@ -2,23 +2,23 @@
   <form (submit)="login($event)" class="app-form-container">
     <mat-card-title class="app-connexion-title"> Connexion</mat-card-title>
     <mat-form-field appearance="fill">
-      <mat-label>Adresse e-mail</mat-label>
+      <mat-label>E-mail adress</mat-label>
       <input [formControl]="userForm.controls.email" matInput name="login" required/>
-      <mat-error *ngIf="userForm.controls.email.invalid && userForm.controls.email.errors.required">L'email est invalide.</mat-error>
-      <mat-error *ngIf="userForm.controls.email.invalid && userForm.controls.email.errors.loginInvalid">L'email ou le mot de passe est
+      <mat-error *ngIf="userForm.controls.email.invalid && userForm.controls.email.errors.required">Email is invalid.</mat-error>
+      <mat-error *ngIf="userForm.controls.email.invalid && userForm.controls.email.errors.loginInvalid">Email or password is
         incorrect.
       </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label>Mot de passe</mat-label>
+      <mat-label>Password</mat-label>
       <input [formControl]="userForm.controls.password" matInput name="password" required type="password"/>
-      <mat-error *ngIf="userForm.controls.password.invalid && userForm.controls.password.errors.required">Le mot de passe est requis.
+      <mat-error *ngIf="userForm.controls.password.invalid && userForm.controls.password.errors.required">Password is required.
       </mat-error>
-      <mat-error *ngIf="userForm.controls.password.invalid && userForm.controls.password.errors.minlength">Le mot de passe doit faire
-        caractères de plus.
+      <mat-error *ngIf="userForm.controls.password.invalid && userForm.controls.password.errors.minlength">Password must do
+        more characters.
       </mat-error>
     </mat-form-field>
-    <mat-error class="error" *ngIf="!hidden &&  error " >Adresse e-mail ou mot de passe incorrect</mat-error>
+    <mat-error class="error" *ngIf="!hidden &&  error " >Incorrect email address or password</mat-error>
     <div class="btn-login">
       <button class="app-connexion-btn" color="accent" *ngIf="!hidden" mat-raised-button
               [disabled]="! userForm.controls.email.valid || ! userForm.controls.password.valid">
@@ -29,10 +29,10 @@
     </div>
     <div class="app-forget-container">
       <span (click)="resetPassword($event)" matBadge="?" matBadgeColor="warn" matBadgePosition="after"
-            matBadgeOverlap="false" class="app-text">Mot de passe oublié</span>
+            matBadgeOverlap="false" class="app-text">Forgot your password</span>
     </div>
     <div class="app-register-container">
-      <span [routerLink]="['/', 'register']" class="app-text"> <mat-icon color="blue"> person_add</mat-icon>&nbsp; S'inscrire</span>
+      <span [routerLink]="['/', 'register']" class="app-text"> <mat-icon color="blue"> person_add</mat-icon>&nbsp; Register</span>
     </div>
 
   </form>

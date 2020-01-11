@@ -7,25 +7,25 @@
       <mat-form-field appearance="legacy">
         <mat-hint>Nickname</mat-hint>
         <input matInput name="nickname" [formControl]="userForm.controls['nickname']" required>
-        <mat-error *ngIf=" userForm.controls.nickname.errors?.required "> Merci de saisir les champs obligatoires
+        <mat-error *ngIf=" userForm.controls.nickname.errors?.required "> Please enter the required fields
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="legacy">
         <mat-hint>Email</mat-hint>
         <input [formControl]="userForm.controls['email']" matInput name="email" required/>
-        <mat-error *ngIf="userForm.controls.email.invalid && userForm.controls.email.errors.required">L'email est
-          invalide.
+        <mat-error *ngIf="userForm.controls.email.invalid && userForm.controls.email.errors.required">The email is
+        invalid.
         </mat-error>
-        <mat-error *ngIf="userForm.controls.email.invalid && userForm.controls.email.errors.loginInvalid">L'email ou le
-          mot de passe est
-          incorrect.
+        <mat-error *ngIf="userForm.controls.email.invalid && userForm.controls.email.errors.loginInvalid">Email or
+        password is
+        incorrect.
         </mat-error>
       </mat-form-field>
       <div class="app-btn">
         <button mat-button (click)="editForm()" *ngIf="disable">Edit
           <mat-icon aria-hidden="false"> edit</mat-icon>
         </button>
-        <button mat-button (click)="submitFrom($event)" *ngIf="!disable">Sauvegarder
+        <button mat-button (click)="submitFrom($event)" *ngIf="!disable">Save
           <mat-icon aria-hidden="false"> save</mat-icon>
         </button>
         <button mat-button (click)="cancelForm()">Cancel
