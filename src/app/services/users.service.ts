@@ -47,6 +47,30 @@ export class UsersService {
       );
   }
 
+  public updateUser(
+    {
+      uuid,
+      nickname,
+      email
+    }: User): Observable<any> {
+
+    return this.httpClient
+      .patch(`${environment.backEndApi}/users/${uuid}`, {
+          nickname, email
+        },
+        this.httpOption
+      )
+      .pipe(
+        map(res => {
+            return res;
+          },
+          catchError(err => {
+            return err;
+          })
+        )
+      );
+  }
+
   public login(
     {
       email,
@@ -69,6 +93,7 @@ export class UsersService {
         )
       );
   }
+
   public sendMailforChangePassword(
     {
       email,

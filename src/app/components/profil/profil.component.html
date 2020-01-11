@@ -1,9 +1,37 @@
 <div class="app-profil-container">
-    <div class="example-container">
-        <mat-card-title class="app-connexion-title"> Nickname</mat-card-title>
-        <mat-card>userForm.controls.nickname</mat-card>
-        <mat-card-title class="app-connexion-title"> E-mail</mat-card-title>
-        <mat-card text="userForm.controls.email">{{userForm.controls.nickname}}</mat-card>
-        <button mat-button (click)="changePassword()">Change password</button>
-    </div>
+  <div class="app-changeBtn">
+    <button mat-button (click)="changePassword($event)">Change password</button>
+  </div>
+  <div class="example-container">
+    <form class="app-form-container">
+      <mat-form-field appearance="legacy">
+        <mat-hint>Nickname</mat-hint>
+        <input matInput name="nickname" [formControl]="userForm.controls['nickname']" required>
+        <mat-error *ngIf=" userForm.controls.nickname.errors?.required "> Merci de saisir les champs obligatoires
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="legacy">
+        <mat-hint>Email</mat-hint>
+        <input [formControl]="userForm.controls['email']" matInput name="email" required/>
+        <mat-error *ngIf="userForm.controls.email.invalid && userForm.controls.email.errors.required">L'email est
+          invalide.
+        </mat-error>
+        <mat-error *ngIf="userForm.controls.email.invalid && userForm.controls.email.errors.loginInvalid">L'email ou le
+          mot de passe est
+          incorrect.
+        </mat-error>
+      </mat-form-field>
+      <div class="app-btn">
+        <button mat-button (click)="editForm()" *ngIf="disable">Edit
+          <mat-icon aria-hidden="false"> edit</mat-icon>
+        </button>
+        <button mat-button (click)="submitFrom($event)" *ngIf="!disable">Sauvegarder
+          <mat-icon aria-hidden="false"> save</mat-icon>
+        </button>
+        <button mat-button (click)="cancelForm()">Cancel
+          <mat-icon aria-hidden="false"> cancel</mat-icon>
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

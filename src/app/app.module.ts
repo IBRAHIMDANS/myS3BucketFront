@@ -31,25 +31,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule, OverlayPanelModule } from 'primeng';
 // component
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { RegisterComponent } from './components/register/register.component';
 import { Error404Component } from './components/error404/error404.component';
-import { LoginComponent } from './components/login/login.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { BucketsModule } from './modules/buckets/buckets.module';
 import { DrawerComponent } from './components/drawer/drawer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfilComponent } from './components/profil/profil.component';
+import { AuthModule } from './modules/auth/auth.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterComponent,
     ToolbarComponent,
     Error404Component,
-    LoginComponent,
-    ResetPasswordComponent,
-    ChangePasswordComponent,
     DrawerComponent,
     HomeComponent,
     ProfilComponent,
@@ -74,15 +68,20 @@ import { ProfilComponent } from './components/profil/profil.component';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatBadgeModule,
-    BucketsModule,
     MatSidenavModule,
     MatListModule,
     MatGridListModule,
     MatExpansionModule,
+    // module custom
+    BucketsModule,
+    AuthModule,
   ],
   exports: [
-    RegisterComponent,
-    Error404Component
+    Error404Component,
+    ToolbarComponent,
+    DrawerComponent,
+    HomeComponent,
+    ProfilComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

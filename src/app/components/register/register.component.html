@@ -4,7 +4,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Username</mat-label>
       <input matInput name="nickname" [formControl]="userForm.controls.nickname" required>
-      <mat-error *ngIf=" userForm.controls.nickname.errors?.required "> Merci de saisir les champs obligatoires
+      <mat-error *ngIf=" userForm.controls.nickname.errors?.required "> Username is required
       </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
@@ -15,16 +15,15 @@
       <mat-error *ngIf=" userForm.controls.email.errors?.required "> Merci de saisir les champs obligatoires</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label>Mot de passe</mat-label>
+      <mat-label>Password</mat-label>
       <label>
         <input matInput name="password" [formControl]="userForm.controls.password" required type="password">
       </label>
       <mat-error *ngIf=" userForm.controls.password.errors?.required "> Merci de saisir les champs obligatoires
       </mat-error>
-
     </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label>Confirmer votre mot de passe</mat-label>
+      <mat-label>Confirm password</mat-label>
       <label>
         <input matInput name="passwordConfrimation" [formControl]="userForm.controls.passwordConfirm" required
                type="password">
