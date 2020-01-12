@@ -21,7 +21,6 @@ const routes: Routes = [
   {
     path: 'changePassword',
     component: ChangePasswordComponent,
-    canActivate: [AdminGuard],
   },
   {
     path: 'profil',
