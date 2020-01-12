@@ -5,6 +5,7 @@ import { Bucket } from '../../interfaces/bucket.interfaces';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ManageBucketComponent } from '../manage-bucket/manage-bucket.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AddBlobComponent } from '../add-blob/add-blob.component';
 
 
 @Component({
@@ -30,6 +31,24 @@ export class BucketsComponent implements OnInit {
   constructor(private bucketService: BucketService, private route: ActivatedRoute,
               private router: Router, public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef) {
     this.data = [];
+  }
+
+  public addBlob(e: Event) {
+    e.preventDefault();
+    this.dialog.open(AddBlobComponent, {
+      autoFocus: true,
+      disableClose: true,
+      data: {
+        title: 'Add',
+      }
+    }).afterClosed().subscribe(res => {
+      if (res !== null) {
+        this.optimistic = res;
+        this.dataSource.data.push({ name: this.optimistic, id: null });
+        this.dataSource.paginator = this.paginator;
+        this.refresh();
+      }
+    });
   }
 
   public createBucket(e: Event) {
