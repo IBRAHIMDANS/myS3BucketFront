@@ -3,6 +3,7 @@ import { BucketService } from '../../services/bucket.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { AddBlobComponent } from '../add-blob/add-blob.component';
+import { ManageBucketComponent } from '../manage-bucket/manage-bucket.component';
 
 @Component({
   selector: 'app-bucket',
@@ -18,16 +19,29 @@ export class BucketComponent implements OnInit {
   ngOnInit() {
   }
 
-  createBlob(e: Event) {
+  public addBlob(e: Event) {
     e.preventDefault();
     this.dialog.open(AddBlobComponent, {
       autoFocus: true,
+      disableClose: true,
       data: {
-        title: 'Upload',
+        title: 'Add',
       }
     }).afterClosed().subscribe(res => {
       console.log(res);
     });
   }
 
+  public createBucket(e: Event) {
+    e.preventDefault();
+    this.dialog.open(ManageBucketComponent, {
+      autoFocus: true,
+      disableClose: true,
+      data: {
+        title: 'Create',
+      }
+    }).afterClosed().subscribe(res => {
+      console.log(res);
+    });
+  }
 }

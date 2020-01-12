@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  backEndApi: 'https://mys3-bucket.herokuapp.com/api'
+  backEndApi: 'http://localhost:8080/api'
+  // backEndApi: 'https://mys3-bucket.herokuapp.com/api'
 };
 
 /*

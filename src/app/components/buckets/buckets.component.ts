@@ -21,7 +21,7 @@ import { AddBlobComponent } from '../add-blob/add-blob.component';
   ],
 })
 export class BucketsComponent implements OnInit {
-  displayedColumns: string[] = ['type', 'name', 'size'];
+  displayedColumns: string[] = ['type', 'name', 'size', 'manage'];
   dataSource: MatTableDataSource<Bucket>;
   public data: [];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -31,6 +31,21 @@ export class BucketsComponent implements OnInit {
   constructor(private bucketService: BucketService, private route: ActivatedRoute,
               private router: Router, public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef) {
     this.data = [];
+  }
+
+  public formatBytes(bytes, decimals = 2) {
+    bytes = Number(bytes);
+    if (bytes === 0) {
+      return '0 Bytes';
+    }
+
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
   public addBlob(e: Event) {
@@ -93,7 +108,6 @@ export class BucketsComponent implements OnInit {
   }
 
   openBucket(row) {
-    console.log(row);
     return this.router.navigate(['/', 'bucket', row.id]);
   }
 
@@ -126,13 +140,26 @@ export class BucketsComponent implements OnInit {
 
   refresh() {
     this.bucketService.getAllBucket().subscribe(res => {
+      let resTemp = [];
+      res.map(b => {
+        if (b.name === b.user.uuid) {
+          // console.log(b.blobs);
+          resTemp = res.filter(i => i.id !== b.id);
+          b.blobs.map(i => resTemp.push(i));
+        }
+      });
       this.data = res;
-      this.dataSource = new MatTableDataSource<Bucket>(res);
+      this.dataSource = new MatTableDataSource<Bucket>(resTemp);
+      console.log(resTemp);
     }, error => {
       return error.message;
     }, () => {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+  }
+
+  isFile(row): boolean {
+    return !!row.size;
   }
 }

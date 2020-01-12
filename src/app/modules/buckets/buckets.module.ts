@@ -30,7 +30,7 @@ import { BucketComponent } from '../../components/bucket/bucket.component';
   ],
   exports: [
     BucketsComponent,
-    BucketComponent
+    BucketComponent,
   ],
   imports: [
     CommonModule,
@@ -49,7 +49,7 @@ import { BucketComponent } from '../../components/bucket/bucket.component';
     MatPaginatorModule,
     TreeModule,
     MatTreeModule,
-    MatProgressBarModule
+    MatProgressBarModule,
   ],
   entryComponents: [
     ManageBucketComponent
