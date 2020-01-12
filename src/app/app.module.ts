@@ -38,6 +38,7 @@ import { DrawerComponent } from './components/drawer/drawer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { AuthModule } from './modules/auth/auth.module';
+import { BlobModule } from './modules/blob/blob.module';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { AuthModule } from './modules/auth/auth.module';
     // module custom
     BucketsModule,
     AuthModule,
+    BlobModule,
   ],
   exports: [
     Error404Component,

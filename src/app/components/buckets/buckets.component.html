@@ -1,5 +1,5 @@
 <div class="app-header">
-  <button mat-button type="text" (click)="openCreateBucket($event)">
+  <button mat-button type="text" (click)="createBucket($event)">
     <mat-icon class="example-icon" aria-hidden="false" aria-label="folder"> create_new_folder</mat-icon>
     <span> Create a Bucket </span>
   </button>
@@ -22,7 +22,7 @@
     <ng-container matColumnDef="size">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Manage</th>
       <td mat-cell *matCellDef="let row" class="app-table-manage">
-        <button mat-raised-button (click)="openBucket($event,row)">
+        <button mat-raised-button (click)="openBucket(row)">
           <mat-icon aria-hidden="false"> folder_open</mat-icon>
         </button>
         <button mat-raised-button (click)="editBucket($event,row)">

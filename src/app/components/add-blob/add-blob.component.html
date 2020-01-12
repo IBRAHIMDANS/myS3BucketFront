@@ -1,0 +1,10 @@
+<mat-icon aria-hidden="false" (click)="onClose($event)"> cancel</mat-icon>
+<p-fileUpload name="demo[]" mode="advanced" uploadLabel="Upload Blob" chooseLabel="Browse"
+              cancelLabel="Cancel Upload"
+              customUpload="true" (uploadHandler)="onUpload($event)" maxFileSize="1000000">
+  <ng-template pTemplate="content">
+    <ul *ngIf="uploadedFiles.length">
+      <li *ngFor="let file of uploadedFiles">  {{file.name}} - {{file.size}} bytes</li>
+    </ul>
+  </ng-template>
+</p-fileUpload>

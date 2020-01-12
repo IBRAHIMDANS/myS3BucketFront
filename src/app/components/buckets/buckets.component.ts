@@ -32,7 +32,7 @@ export class BucketsComponent implements OnInit {
     this.data = [];
   }
 
-  public openCreateBucket(e: Event) {
+  public createBucket(e: Event) {
     e.preventDefault();
     this.dialog.open(ManageBucketComponent, {
       autoFocus: true,
@@ -73,7 +73,8 @@ export class BucketsComponent implements OnInit {
     });
   }
 
-  openBucket(e: Event, row) {
+  openBucket(row) {
+    console.log(row);
     return this.router.navigate(['/', 'bucket', row.id]);
   }
 

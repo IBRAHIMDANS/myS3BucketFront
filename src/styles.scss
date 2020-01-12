@@ -10,7 +10,9 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: #dedede;
 }
-
+mat-icon {
+  cursor: pointer;
+}
 .app-loading {
   position: relative;
   display: flex;

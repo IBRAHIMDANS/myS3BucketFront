@@ -2,7 +2,7 @@
   <form (submit)="login($event)" class="app-form-container">
     <mat-card-title class="app-connexion-title"> Connexion</mat-card-title>
     <mat-form-field appearance="fill">
-      <mat-label>E-mail adress</mat-label>
+      <mat-label>Email</mat-label>
       <input [formControl]="userForm.controls.email" matInput name="login" required/>
       <mat-error *ngIf="userForm.controls.email.invalid && userForm.controls.email.errors.required">Email is invalid.</mat-error>
       <mat-error *ngIf="userForm.controls.email.invalid && userForm.controls.email.errors.loginInvalid">Email or password is
@@ -29,7 +29,7 @@
     </div>
     <div class="app-forget-container">
       <span (click)="resetPassword($event)" matBadge="?" matBadgeColor="warn" matBadgePosition="after"
-            matBadgeOverlap="false" class="app-text">Forgot your password</span>
+            matBadgeOverlap="false" class="app-text">Forgot password</span>
     </div>
     <div class="app-register-container">
       <span [routerLink]="['/', 'register']" class="app-text"> <mat-icon color="blue"> person_add</mat-icon>&nbsp; Register</span>
