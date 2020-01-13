@@ -27,10 +27,12 @@ export class BucketsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   public optimistic;
+  public urlParam;
 
   constructor(private bucketService: BucketService, private route: ActivatedRoute,
               private router: Router, public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef) {
     this.data = [];
+    this.urlParam = this.router.routerState.snapshot.url.split('/').pop().toString();
   }
 
   public formatBytes(bytes, decimals = 2) {
@@ -139,10 +141,7 @@ export class BucketsComponent implements OnInit {
   }
 
   refresh() {
-    const urlParam = this.router.routerState.snapshot.url.split('/').pop();
-    // console.log(this.route.snapshot);
-    // console.log(this.route.snapshot.firstChild.data);
-    if(urlParam == 'bucket') {
+    if(this.urlParam === 'bucket') {
       this.bucketService.getAllBucket().subscribe(res => {
         let resTemp = [];
         res.map(b => {
@@ -162,7 +161,24 @@ export class BucketsComponent implements OnInit {
         this.dataSource.sort = this.sort;
       });
     } else {
-      
+      this.bucketService.getBucketById({id: this.urlParam}).subscribe(res => {
+        let resTemp = [];
+        res.map(b => {
+          if (b.name === b.user.uuid) {
+            // console.log(b.blobs);
+            resTemp = res.filter(i => i.id !== b.id);
+            b.blobs.map(i => resTemp.push(i));
+          }
+        });
+        this.data = res;
+        this.dataSource = new MatTableDataSource<Bucket>(resTemp);
+        console.log(resTemp);
+      }, error => {
+        return error.message;
+      }, () => {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
     }
   }
 

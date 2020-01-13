@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         password: this.userForm.controls.password.value
       }).subscribe(res => {
         this.hidden = false;
-        this.router.navigate(['/', 'home']);
+        this.router.navigate(['/', 'bucket']);
         if (isPlatformBrowser(this.platformId)) {
           return localStorage.setItem('token', res.meta.token);
         }

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BucketsComponent } from '../../components/buckets/buckets.component';
-import { BucketComponent } from '../../components/bucket/bucket.component';
 
 
 const routes: Routes = [

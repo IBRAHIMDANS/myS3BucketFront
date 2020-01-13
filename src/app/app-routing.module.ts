@@ -5,7 +5,6 @@ import { Error404Component } from './components/error404/error404.component';
 import { LoginComponent } from './components/login/login.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ProfilComponent } from './components/profil/profil.component';
-import { HomeComponent } from './pages/home/home.component';
 import { BucketsModule } from './modules/buckets/buckets.module';
 import { AdminGuard } from './guards/admin.guard';
 
@@ -29,11 +28,6 @@ const routes: Routes = [
     component: ProfilComponent
   },
   {
-    path: 'home',
-    canActivate: [AdminGuard],
-    component: HomeComponent
-  },
-  {
     path: 'bucket',
     canActivate: [AdminGuard],
     loadChildren: () => BucketsModule,
@@ -41,7 +35,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'home'
+    redirectTo: 'bucket'
   },
   {
     path: '**',

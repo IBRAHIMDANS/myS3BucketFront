@@ -35,7 +35,6 @@ import { Error404Component } from './components/error404/error404.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { BucketsModule } from './modules/buckets/buckets.module';
 import { DrawerComponent } from './components/drawer/drawer.component';
-import { HomeComponent } from './pages/home/home.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { AuthModule } from './modules/auth/auth.module';
 import { BlobModule } from './modules/blob/blob.module';
@@ -46,7 +45,6 @@ import { BlobModule } from './modules/blob/blob.module';
     ToolbarComponent,
     Error404Component,
     DrawerComponent,
-    HomeComponent,
     ProfilComponent,
   ],
   imports: [
@@ -82,7 +80,6 @@ import { BlobModule } from './modules/blob/blob.module';
     Error404Component,
     ToolbarComponent,
     DrawerComponent,
-    HomeComponent,
     ProfilComponent,
   ],
   providers: [

@@ -19,18 +19,15 @@ import { ManageBucketComponent } from '../../components/manage-bucket/manage-buc
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TreeModule } from 'primeng';
-import { BucketComponent } from '../../components/bucket/bucket.component';
 
 
 @NgModule({
   declarations: [
     BucketsComponent,
     ManageBucketComponent,
-    BucketComponent,
   ],
   exports: [
     BucketsComponent,
-    BucketComponent,
   ],
   imports: [
     CommonModule,
