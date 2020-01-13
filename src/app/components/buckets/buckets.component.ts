@@ -139,24 +139,31 @@ export class BucketsComponent implements OnInit {
   }
 
   refresh() {
-    this.bucketService.getAllBucket().subscribe(res => {
-      let resTemp = [];
-      res.map(b => {
-        if (b.name === b.user.uuid) {
-          // console.log(b.blobs);
-          resTemp = res.filter(i => i.id !== b.id);
-          b.blobs.map(i => resTemp.push(i));
-        }
+    const urlParam = this.router.routerState.snapshot.url.split('/').pop();
+    // console.log(this.route.snapshot);
+    // console.log(this.route.snapshot.firstChild.data);
+    if(urlParam == 'bucket') {
+      this.bucketService.getAllBucket().subscribe(res => {
+        let resTemp = [];
+        res.map(b => {
+          if (b.name === b.user.uuid) {
+            // console.log(b.blobs);
+            resTemp = res.filter(i => i.id !== b.id);
+            b.blobs.map(i => resTemp.push(i));
+          }
+        });
+        this.data = res;
+        this.dataSource = new MatTableDataSource<Bucket>(resTemp);
+        console.log(resTemp);
+      }, error => {
+        return error.message;
+      }, () => {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
-      this.data = res;
-      this.dataSource = new MatTableDataSource<Bucket>(resTemp);
-      console.log(resTemp);
-    }, error => {
-      return error.message;
-    }, () => {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
+    } else {
+      
+    }
   }
 
   isFile(row): boolean {
