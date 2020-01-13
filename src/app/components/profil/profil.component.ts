@@ -14,7 +14,7 @@ import { MatDialog } from '@angular/material';
 })
 export class ProfilComponent implements OnInit {
   public userForm: FormGroup;
-  private disable: boolean;
+  public disable: boolean;
 
   constructor(private route: ActivatedRoute,
               private router: Router, private formBuilder: FormBuilder,
