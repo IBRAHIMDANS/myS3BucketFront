@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { BucketService } from '../../services/bucket.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { decodeToken } from '../../helpers/token';
 
 @Component({
   selector: 'app-manage-bucket',
@@ -44,6 +45,7 @@ export class ManageBucketComponent implements OnInit {
       if (this.urlParam === 'bucket') {
         return this.bucketService.addBucket({
           name: this.name.value,
+          parentId: decodeToken().parentIdBucket
         }).subscribe(res => {
           this.dialogRef.close(this.name.value);
           return res;
@@ -51,7 +53,15 @@ export class ManageBucketComponent implements OnInit {
           return error;
         });
       } else {
-        return;
+        return this.bucketService.addBucket({
+          name: this.name.value,
+          parentId: this.urlParam
+        }).subscribe(res => {
+          this.dialogRef.close(this.name.value);
+          return res;
+        }, error => {
+          return error;
+        });
       }
     } else if (this.data.title === 'Delete') {
       return this.bucketService.deleteBucket({

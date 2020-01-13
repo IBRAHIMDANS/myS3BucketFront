@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { BucketService } from '../../services/bucket.service';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Bucket } from '../../interfaces/bucket.interfaces';
@@ -6,6 +6,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { ManageBucketComponent } from '../manage-bucket/manage-bucket.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddBlobComponent } from '../add-blob/add-blob.component';
+import { decodeToken } from '../../helpers/token';
 
 
 @Component({
@@ -20,7 +21,8 @@ import { AddBlobComponent } from '../add-blob/add-blob.component';
     ]),
   ],
 })
-export class BucketsComponent implements OnInit {
+export class BucketsComponent implements OnInit, OnDestroy {
+
   displayedColumns: string[] = ['type', 'name', 'size', 'manage'];
   dataSource: MatTableDataSource<Bucket>;
   public data: [];
@@ -28,11 +30,23 @@ export class BucketsComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   public optimistic;
   public urlParam;
+  public path;
 
   constructor(private bucketService: BucketService, private route: ActivatedRoute,
               private router: Router, public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef) {
     this.data = [];
+  }
+
+  ngOnInit() {
+    this.refresh();
     this.urlParam = this.router.routerState.snapshot.url.split('/').pop().toString();
+  }
+
+  public ngOnDestroy(): void {
+    this.dataSource = new MatTableDataSource<Bucket>([]);
+    this.urlParam = '';
+    this.data = [];
+    this.path = '';
   }
 
   public formatBytes(bytes, decimals = 2) {
@@ -50,22 +64,46 @@ export class BucketsComponent implements OnInit {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
+  public openBucket(row) {
+    return this.router.navigate(['/bucket', row.id], { state: { row } }).then(() => {
+      this.refresh();
+    });
+  }
+
   public addBlob(e: Event) {
     e.preventDefault();
-    this.dialog.open(AddBlobComponent, {
-      autoFocus: true,
-      disableClose: true,
-      data: {
-        title: 'Add',
-      }
-    }).afterClosed().subscribe(res => {
-      if (res !== null) {
-        this.optimistic = res;
-        this.dataSource.data.push({ name: this.optimistic, id: null });
-        this.dataSource.paginator = this.paginator;
-        this.refresh();
-      }
-    });
+    if (this.urlParam === 'bucket') {
+      this.dialog.open(AddBlobComponent, {
+        autoFocus: true,
+        disableClose: true,
+        data: {
+          title: 'Add',
+        }
+      }).afterClosed().subscribe(res => {
+        if (res !== null) {
+          this.optimistic = res;
+          this.dataSource.data.push({ name: this.optimistic, id: null });
+          this.dataSource.paginator = this.paginator;
+          this.refresh();
+        }
+      });
+    } else {
+      this.dialog.open(AddBlobComponent, {
+        autoFocus: true,
+        disableClose: true,
+        data: {
+          title: 'Add',
+          path: this.path
+        }
+      }).afterClosed().subscribe(res => {
+        if (res !== null) {
+          this.optimistic = res;
+          this.dataSource.data.push({ name: this.optimistic, id: null });
+          this.dataSource.paginator = this.paginator;
+          this.refresh();
+        }
+      });
+    }
   }
 
   public createBucket(e: Event) {
@@ -86,10 +124,6 @@ export class BucketsComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.refresh();
-  }
-
   editBucket(e: Event, row) {
     e.preventDefault();
     this.dialog.open(ManageBucketComponent, {
@@ -107,10 +141,6 @@ export class BucketsComponent implements OnInit {
         this.refresh();
       }
     });
-  }
-
-  openBucket(row) {
-    return this.router.navigate(['/', 'bucket', row.id]);
   }
 
   deleteBucket(e: Event, row) {
@@ -141,38 +171,44 @@ export class BucketsComponent implements OnInit {
   }
 
   refresh() {
+    this.urlParam = this.router.routerState.snapshot.url.split('/').pop().toString();
     if (this.urlParam === 'bucket') {
-      this.bucketService.getAllBucket().subscribe(res => {
-        let resTemp = [];
-        res.map(b => {
-          if (b.name === b.user.uuid) {
-            // console.log(b.blobs);
-            resTemp = res.filter(i => i.id !== b.id);
-            b.blobs.map(i => resTemp.push(i));
-          }
+      this.bucketService
+        .getBucketById({
+          id: decodeToken().parentIdBucket
+        })
+        .subscribe(res => {
+          let resTemp = [];
+          res.map(b => {
+            if (b.name === b.user.uuid) {
+              this.data = res.filter(i => i.id === b.id);
+              resTemp = res.filter(i => i.id !== b.id);
+              b.blobs.map(i => resTemp.push(i));
+            }
+          });
+          this.dataSource = new MatTableDataSource<Bucket>(resTemp);
+        }, error => {
+          return error.message;
+        }, () => {
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
         });
-        this.data = res;
-        this.dataSource = new MatTableDataSource<Bucket>(resTemp);
-        console.log(resTemp);
-      }, error => {
-        return error.message;
-      }, () => {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      });
     } else {
-      this.bucketService.getBucketById({ id: this.urlParam }).subscribe(res => {
+      this.bucketService.getBucketById({
+        id: this.urlParam
+      }).subscribe(res => {
         let resTemp = [];
         res.map(b => {
-          if (b.name === b.user.uuid) {
-            // console.log(b.blobs);
+          if (b.id === +this.urlParam) {
+            console.log('bucket', b);
+            this.path = b.path;
+            this.data = res.filter(i => i.id === b.id);
             resTemp = res.filter(i => i.id !== b.id);
             b.blobs.map(i => resTemp.push(i));
           }
         });
         this.data = res;
         this.dataSource = new MatTableDataSource<Bucket>(resTemp);
-        console.log(resTemp);
       }, error => {
         return error.message;
       }, () => {

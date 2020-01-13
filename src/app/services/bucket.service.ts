@@ -23,10 +23,11 @@ export class BucketService {
     };
   }
 
-  public addBucket({ name }: Bucket): Observable<any> {
+  public addBucket({ name, parentId }: Bucket): Observable<any> {
     return this.httpClient
       .post(`${environment.backEndApi}/bucket`, {
           name: toLower(name),
+          parentId
         },
         this.httpOptions
       )
