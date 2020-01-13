@@ -2,6 +2,7 @@ import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { BucketService } from '../../services/bucket.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-bucket',
@@ -14,10 +15,14 @@ export class ManageBucketComponent implements OnInit {
   public name = new FormControl('', [Validators.required]);
   public title: string;
   private hidden: boolean;
+  public urlParam;
 
   constructor(private bucketService: BucketService,
               public dialogRef: MatDialogRef<ManageBucketComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) {
+              @Inject(MAT_DIALOG_DATA) public data, private route: ActivatedRoute,
+              private router: Router) {
+    this.urlParam = this.router.routerState.snapshot.url.split('/').pop().toString();
+
   }
 
   ngOnInit() {
@@ -36,14 +41,18 @@ export class ManageBucketComponent implements OnInit {
   public submit(e: Event) {
     e.preventDefault();
     if (this.data.title === 'Create') {
-      return this.bucketService.addBucket({
-        name: this.name.value,
-      }).subscribe(res => {
-        this.dialogRef.close(this.name.value);
-        return res;
-      }, error => {
-        return error;
-      });
+      if (this.urlParam === 'bucket') {
+        return this.bucketService.addBucket({
+          name: this.name.value,
+        }).subscribe(res => {
+          this.dialogRef.close(this.name.value);
+          return res;
+        }, error => {
+          return error;
+        });
+      } else {
+        return;
+      }
     } else if (this.data.title === 'Delete') {
       return this.bucketService.deleteBucket({
         id: this.data.infos.id,

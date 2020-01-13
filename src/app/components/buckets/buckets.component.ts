@@ -141,7 +141,7 @@ export class BucketsComponent implements OnInit {
   }
 
   refresh() {
-    if(this.urlParam === 'bucket') {
+    if (this.urlParam === 'bucket') {
       this.bucketService.getAllBucket().subscribe(res => {
         let resTemp = [];
         res.map(b => {
@@ -161,7 +161,7 @@ export class BucketsComponent implements OnInit {
         this.dataSource.sort = this.sort;
       });
     } else {
-      this.bucketService.getBucketById({id: this.urlParam}).subscribe(res => {
+      this.bucketService.getBucketById({ id: this.urlParam }).subscribe(res => {
         let resTemp = [];
         res.map(b => {
           if (b.name === b.user.uuid) {

@@ -38,23 +38,23 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Manage</th>
       <td mat-cell *matCellDef="let row">
         <div *ngIf="!isFile(row); else ok" class="app-table-manage">
-          <button mat-raised-button (click)="openBucket(row)">
+          <button mat-raised-button matTooltip="Open" (click)="openBucket(row)">
             <mat-icon aria-hidden="false"> folder_open</mat-icon>
           </button>
-          <button mat-raised-button (click)="editBucket($event,row)">
+          <button mat-raised-button matTooltip="Edit" (click)="editBucket($event,row)">
             <mat-icon aria-hidden="false"> edit</mat-icon>
           </button>
-          <button mat-raised-button (click)="deleteBucket($event,row)">
+          <button mat-raised-button matTooltip="Delete" (click)="deleteBucket($event,row)">
             <mat-icon aria-hidden="false"> delete</mat-icon>
           </button>
         </div>
         <ng-template #ok>
           <div class="app-table-manage">
-            <button mat-raised-button>
+            <button mat-raised-button matTooltip="Delete">
               <mat-icon aria-hidden="false"> delete</mat-icon>
             </button>
-            <button mat-raised-button>
-              <mat-icon aria-hidden="false"> control_point_duplicate</mat-icon>
+            <button mat-raised-button matTooltip="Duplicate" >
+              <mat-icon aria-hidden="false"> file_copy</mat-icon>
             </button>
           </div>
         </ng-template>
