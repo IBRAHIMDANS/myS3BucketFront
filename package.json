@@ -5,7 +5,7 @@
   "author": "Ibrahima DANSOKO <ibrahima.dansoko@outlook.com>, Benjamin Benoit",
   "scripts": {
     "ng": "ng",
-    "start:heroku": "node server.js",
+    "start:heroku": "node mainServer.js",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
