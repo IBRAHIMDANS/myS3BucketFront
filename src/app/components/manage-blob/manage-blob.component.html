@@ -1,5 +1,5 @@
 <div class="app-content" *ngIf="data.title !== 'Information'; else IsInfo">
-  <form class="app-form" (submit)="submit($event)">
+  <form class="app-form">
     <mat-card-title>{{title}}</mat-card-title>
     <mat-card-content appearance="fill" *ngIf="data.title !== 'Delete'">
       <p>
