@@ -50,21 +50,6 @@ export class BucketsComponent implements OnInit, OnDestroy {
     this.path = '';
   }
 
-  public formatBytes(bytes, decimals = 2) {
-    bytes = Number(bytes);
-    if (bytes === 0) {
-      return '0 Bytes';
-    }
-
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-  }
-
   public openBucket(row) {
     return this.router.navigate(['/bucket', row.id], { state: { row } }).then(() => {
       this.refresh();
@@ -107,7 +92,16 @@ export class BucketsComponent implements OnInit, OnDestroy {
     }
   }
 
-  duplicateBlob(e: Event, row) {
+  public returnOptimist(res) {
+    if (res !== null) {
+      this.optimistic = res;
+      this.dataSource.data.push({ name: this.optimistic, id: null });
+      this.dataSource.paginator = this.paginator;
+      this.refresh();
+    }
+  }
+
+  public duplicateBlob(e: Event, row) {
     e.preventDefault();
     this.dialog.open(ManageBlobComponent, {
       autoFocus: true,
@@ -117,16 +111,11 @@ export class BucketsComponent implements OnInit, OnDestroy {
         infos: row
       }
     }).afterClosed().subscribe(res => {
-      if (res !== null) {
-        this.optimistic = res;
-        this.dataSource.data.push({ name: this.optimistic, id: null });
-        this.dataSource.paginator = this.paginator;
-        this.refresh();
-      }
+      this.returnOptimist(res);
     });
   }
 
-  deleteBlob(e: Event, row) {
+  public deleteBlob(e: Event, row) {
     e.preventDefault();
     this.dialog.open(ManageBlobComponent, {
       autoFocus: true,
@@ -136,14 +125,38 @@ export class BucketsComponent implements OnInit, OnDestroy {
         infos: row
       }
     }).afterClosed().subscribe(res => {
-      if (res !== null) {
-        this.optimistic = res;
-        this.dataSource.data = this.dataSource.data.filter(i => i.id !== row.id);
-        this.dataSource.paginator = this.paginator;
-        this.refresh();
-      }
+      this.returnOptimist(res);
     });
   }
+
+  public dowloadBlob(e: Event, row) {
+    e.preventDefault();
+    this.dialog.open(ManageBlobComponent, {
+      autoFocus: true,
+      disableClose: true,
+      data: {
+        title: 'Download',
+        infos: row
+      }
+    }).afterClosed().subscribe(res => {
+      this.returnOptimist(res);
+    });
+  }
+
+  public informationBlob(e: Event, row) {
+    e.preventDefault();
+    this.dialog.open(ManageBlobComponent, {
+      autoFocus: true,
+      disableClose: false,
+      data: {
+        title: 'Information',
+        infos: row
+      }
+    }).afterClosed().subscribe(res => {
+      this.returnOptimist(res);
+    });
+  }
+
 
   public createBucket(e: Event) {
     e.preventDefault();
@@ -163,7 +176,7 @@ export class BucketsComponent implements OnInit, OnDestroy {
     });
   }
 
-  editBucket(e: Event, row) {
+  public editBucket(e: Event, row) {
     e.preventDefault();
     this.dialog.open(ManageBucketComponent, {
       autoFocus: true,
@@ -182,7 +195,7 @@ export class BucketsComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteBucket(e: Event, row) {
+  public deleteBucket(e: Event, row) {
     e.preventDefault();
     this.dialog.open(ManageBucketComponent, {
       autoFocus: true,
@@ -192,16 +205,11 @@ export class BucketsComponent implements OnInit, OnDestroy {
         infos: row
       }
     }).afterClosed().subscribe(res => {
-      if (res !== null) {
-        this.optimistic = res;
-        this.dataSource.data = this.dataSource.data.filter(i => i.id !== row.id);
-        this.dataSource.paginator = this.paginator;
-        this.refresh();
-      }
+      this.returnOptimist(res);
     });
   }
 
-  applyFilter(filterValue: string) {
+  public applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
@@ -209,7 +217,7 @@ export class BucketsComponent implements OnInit, OnDestroy {
     }
   }
 
-  refresh() {
+  public refresh() {
     this.urlParam = this.router.routerState.snapshot.url.split('/').pop().toString();
     if (this.urlParam === 'bucket') {
       this.bucketService
@@ -257,7 +265,7 @@ export class BucketsComponent implements OnInit, OnDestroy {
     }
   }
 
-  isFile(row): boolean {
+  public isFile(row): boolean {
     return !!row.size;
   }
 }

@@ -1,17 +1,34 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { BlobRoutingModule } from './blob-routing.module';
 import { AddBlobComponent } from '../../components/add-blob/add-blob.component';
 import { FileUploadModule, TreeModule } from 'primeng';
-import { MatButtonModule, MatIconModule, MatCardTitle, MatDialogModule, MatCardModule, MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatTreeModule, MatProgressBarModule, MatTooltipModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTooltipModule,
+  MatTreeModule
+} from '@angular/material';
 import { ManageBlobComponent } from '../../components/manage-blob/manage-blob.component';
 import { BucketsRoutingModule } from '../buckets/buckets-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormatBytesPipe } from '../../pipes/format-bytes.pipe';
 
 
 @NgModule({
-  declarations: [AddBlobComponent, ManageBlobComponent],
+  declarations: [
+    AddBlobComponent,
+    ManageBlobComponent,
+    FormatBytesPipe
+  ],
   imports: [
     CommonModule,
     BucketsRoutingModule,
@@ -31,9 +48,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatTreeModule,
     MatProgressBarModule,
     MatTooltipModule,
+    FileUploadModule,
+    MatListModule,
   ],
-  entryComponents: [AddBlobComponent, ManageBlobComponent],
-  exports: [AddBlobComponent, ManageBlobComponent]
+  entryComponents: [
+    AddBlobComponent,
+    ManageBlobComponent
+  ],
+  exports: [
+    AddBlobComponent,
+    ManageBlobComponent,
+    FormatBytesPipe
+  ]
 })
 export class BlobModule {
 }

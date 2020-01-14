@@ -25,7 +25,8 @@ import {
   MatMenuModule,
   MatProgressSpinnerModule,
   MatSidenavModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTooltipModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule, OverlayPanelModule } from 'primeng';
@@ -75,6 +76,7 @@ import { BlobModule } from './modules/blob/blob.module';
     BucketsModule,
     AuthModule,
     BlobModule,
+    MatTooltipModule,
   ],
   exports: [
     Error404Component,

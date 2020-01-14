@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TreeModule } from 'primeng';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { BlobModule } from '../blob/blob.module';
 
 
 @NgModule({
@@ -30,26 +31,27 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   exports: [
     BucketsComponent,
   ],
-    imports: [
-        CommonModule,
-        BucketsRoutingModule,
-        FormsModule,
-        MatIconModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatFormFieldModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatTableModule,
-        MatSortModule,
-        MatPaginatorModule,
-        TreeModule,
-        MatTreeModule,
-        MatProgressBarModule,
-        MatTooltipModule,
-    ],
+  imports: [
+    CommonModule,
+    BucketsRoutingModule,
+    FormsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    TreeModule,
+    MatTreeModule,
+    MatProgressBarModule,
+    MatTooltipModule,
+    BlobModule,
+  ],
   entryComponents: [
     ManageBucketComponent
   ]

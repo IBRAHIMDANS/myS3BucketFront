@@ -1,14 +1,14 @@
 <mat-toolbar color="primary" [ngClass]="isLogged() ? 'app-toolbar' : 'app-connect' ">
   <mat-icon class="example-icon" *ngIf="isLogged()" (click)="goToHome()" aria-hidden="false"
-            aria-label="account_circle">
+            aria-label="account_circle" matTooltip="Home" >
     home
   </mat-icon>
   <span (click)="goToHome()">myS3 Bucket</span>
   <div *ngIf="isLogged()">
-    <mat-icon class="app-profil" *ngIf="isLogged()" (click)="goToProfil()" aria-hidden="true"
+    <mat-icon class="app-profil" *ngIf="isLogged()" matTooltip="Account" (click)="goToProfil()" aria-hidden="true"
               [attr.aria-label]="nickname ? nickname : 'Profil'"> account_circle
     </mat-icon>
-    <mat-icon class="example-icon" aria-hidden="false" aria-label="log-out" *ngIf="isLogged()" (click)="disconnect()">
+    <mat-icon class="example-icon" aria-hidden="false" matTooltip="Logout"  aria-label="log-out" *ngIf="isLogged()" (click)="disconnect()">
       logout
     </mat-icon>
   </div>

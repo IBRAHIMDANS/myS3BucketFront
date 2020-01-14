@@ -19,6 +19,29 @@ export class BlobService {
     };
   }
 
+  public getBlob(id): Observable<any> {
+    return this.httpClient
+      .get(`${environment.backEndApi}/blob/${id}`,
+        {
+          headers: new HttpHeaders({
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          }),
+          responseType: 'text'
+        }
+      )
+      .pipe(
+        map(res => {
+            console.log(res);
+            return res;
+          },
+          catchError(err => {
+            return err;
+          })
+        )
+      );
+  }
+
   public addBlob(file, blobName?: string): Observable<any> {
     if (blobName) {
       return this.httpClient

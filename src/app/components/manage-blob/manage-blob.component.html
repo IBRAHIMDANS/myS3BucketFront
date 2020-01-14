@@ -1,37 +1,48 @@
-<div class="app-content">
-<form class="app-form" (submit)="submit($event)">
+<div class="app-content" *ngIf="data.title !== 'Information'; else IsInfo">
+  <form class="app-form" (submit)="submit($event)">
     <mat-card-title>{{title}}</mat-card-title>
     <mat-card-content appearance="fill" *ngIf="data.title !== 'Delete'">
-    <p>
+      <p>
         Are you sure you want to duplicate this bucket ?
-    </p>
+      </p>
     </mat-card-content>
     <div class="app-action-container">
-    <button mat-raised-button type="submit" [disabled]=" name.invalid" *ngIf="data.title !== 'Duplicate'">
+      <button mat-raised-button type="submit" [disabled]=" name.invalid" *ngIf="data.title !== 'Duplicate'">
         <mat-icon aria-hidden="false"> duplicate</mat-icon>
-    </button>
-    <button mat-raised-button type="submit"  *ngIf="data.title === 'Duplicate'">
+      </button>
+      <button mat-raised-button type="submit" *ngIf="data.title === 'Duplicate'">
         Yes
-    </button>
-    <button (click)="onClose($event)" mat-raised-button>
+      </button>
+      <button (click)="onClose($event)" mat-raised-button>
         <mat-icon color="warn" aria-hidden="false"> cancel</mat-icon>
-    </button>
+      </button>
     </div>
     <mat-card-content *ngIf="data.title === 'Delete'">
-    <p>
+      <p>
         Are you sure you want to delete this bucket ?
-    </p>
+      </p>
     </mat-card-content>
     <div class="app-action-container">
-    <button mat-raised-button type="submit" [disabled]=" name.invalid" *ngIf="data.title !== 'Delete'">
+      <button mat-raised-button type="submit" [disabled]=" name.invalid" *ngIf="data.title !== 'Delete'">
         <mat-icon aria-hidden="false"> save</mat-icon>
-    </button>
-    <button mat-raised-button type="submit"  *ngIf="data.title === 'Delete'">
+      </button>
+      <button mat-raised-button type="submit" *ngIf="data.title === 'Delete'">
         Yes
-    </button>
-    <button (click)="onClose($event)" mat-raised-button>
+      </button>
+      <button (click)="onClose($event)" mat-raised-button>
         <mat-icon color="warn" aria-hidden="false"> cancel</mat-icon>
-    </button>
+      </button>
     </div>
-</form>
-</div>      
+  </form>
+</div>
+<ng-template #IsInfo>
+  <mat-card>
+  <mat-card-title>{{title}}</mat-card-title>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item> Name: {{data.infos.name}} </mat-list-item>
+        <mat-list-item> Size: {{data.infos.size | formatBytes}} </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
