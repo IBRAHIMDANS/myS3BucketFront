@@ -50,11 +50,14 @@
         </div>
         <ng-template #ok>
           <div class="app-table-manage">
-            <button mat-raised-button matTooltip="Delete">
-              <mat-icon aria-hidden="false"> delete</mat-icon>
+            <button mat-raised-button matTooltip="Information" >
+              <mat-icon aria-hidden="false"> info</mat-icon>
             </button>
-            <button mat-raised-button matTooltip="Duplicate" >
+            <button mat-raised-button matTooltip="Duplicate"  (click)="duplicateBlob($event,row)">
               <mat-icon aria-hidden="false"> file_copy</mat-icon>
+            </button>
+            <button mat-raised-button matTooltip="Delete"  (click)="deleteBlob($event,row)">
+              <mat-icon aria-hidden="false"> delete</mat-icon>
             </button>
           </div>
         </ng-template>

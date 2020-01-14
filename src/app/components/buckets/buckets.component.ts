@@ -7,6 +7,7 @@ import { ManageBucketComponent } from '../manage-bucket/manage-bucket.component'
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddBlobComponent } from '../add-blob/add-blob.component';
 import { decodeToken } from '../../helpers/token';
+import { ManageBlobComponent } from '../manage-blob/manage-blob.component';
 
 
 @Component({
@@ -104,6 +105,44 @@ export class BucketsComponent implements OnInit, OnDestroy {
         }
       });
     }
+  }
+
+  duplicateBlob(e: Event, row) {
+    e.preventDefault();
+    this.dialog.open(ManageBlobComponent, {
+      autoFocus: true,
+      disableClose: true,
+      data: {
+        title: 'Duplicate',
+        infos: row
+      }
+    }).afterClosed().subscribe(res => {
+      if (res !== null) {
+        this.optimistic = res;
+        this.dataSource.data.push({ name: this.optimistic, id: null });
+        this.dataSource.paginator = this.paginator;
+        this.refresh();
+      }
+    });
+  }
+
+  deleteBlob(e: Event, row) {
+    e.preventDefault();
+    this.dialog.open(ManageBlobComponent, {
+      autoFocus: true,
+      disableClose: true,
+      data: {
+        title: 'Delete',
+        infos: row
+      }
+    }).afterClosed().subscribe(res => {
+      if (res !== null) {
+        this.optimistic = res;
+        this.dataSource.data = this.dataSource.data.filter(i => i.id !== row.id);
+        this.dataSource.paginator = this.paginator;
+        this.refresh();
+      }
+    });
   }
 
   public createBucket(e: Event) {
