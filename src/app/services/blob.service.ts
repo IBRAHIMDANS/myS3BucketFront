@@ -27,12 +27,42 @@ export class BlobService {
             'Access-Control-Allow-Origin': '*',
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           }),
-          responseType: 'text'
+          responseType: 'blob'
         }
       )
       .pipe(
         map(res => {
-            console.log(res);
+            return res;
+          },
+          catchError(err => {
+            return err;
+          })
+        )
+      );
+  }
+
+  public duplicateBlob(blobNumber: number): Observable<any> {
+    return this.httpClient
+      .post(`${environment.backEndApi}/blob/duplicate/${blobNumber}`, {},
+        this.httpOptions
+      )
+      .pipe(
+        map(res => {
+            return res;
+          },
+          catchError(err => {
+            return err;
+          })
+        )
+      );
+  }
+  public deleteBlob(blobNumber: number): Observable<any> {
+    return this.httpClient
+      .delete(`${environment.backEndApi}/blob/${blobNumber}`,
+        this.httpOptions
+      )
+      .pipe(
+        map(res => {
             return res;
           },
           catchError(err => {
@@ -50,7 +80,6 @@ export class BlobService {
         )
         .pipe(
           map(res => {
-              console.log(res);
               return res;
             },
             catchError(err => {
@@ -65,7 +94,6 @@ export class BlobService {
         )
         .pipe(
           map(res => {
-              console.log(res);
               return res;
             },
             catchError(err => {
