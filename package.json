@@ -2,7 +2,12 @@
   "name": "my-s3-bucket-front",
   "version": "1.0.0",
   "description": "Simple app as Amazon S3 with angular deploy to heroku",
-  "author": "Ibrahima DANSOKO <ibrahima.dansoko@outlook.com>, Benjamin Benoit",
+  "author": "Ibrahima DANSOKO <ibrahima.dansoko@outlook.com>",
+  "contributors": [
+    {
+      "name": "Benjamin Benoit"
+    }
+  ],
   "scripts": {
     "ng": "ng",
     "start:heroku": "node mainServer.js",
